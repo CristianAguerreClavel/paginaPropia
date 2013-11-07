@@ -1,0 +1,608 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Codigo funciones propias</title>
+    </head>
+    <body>
+        <h1>CODIGO FUNCIONES PROPIAS</h1>
+        <form>
+        <fieldset>
+        <legend>Codigo</legend>
+        <pre>
+        &lt;script type="text/javascript"&gt;
+        	
+        	function errorCadenaVacia(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("cadena");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(cadenaTexto == "" || cadenaTexto == "Introduce una cadena")
+        		{
+        			error = true;
+        			alert("El campo introduce una cadena esta vacio");
+        			return error;
+        		}
+        	}
+        	
+        	function errorParametro1(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("parametro1");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(cadenaTexto == "" || cadenaTexto == "Introduce el parametro 1")
+        		{
+        			error = true;
+        			alert("Esta funcion requiere del primer parametro");
+        			return error;
+        		}
+        	}
+        	function errorParametro2(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("parametro2");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(cadenaTexto == "" || cadenaTexto == "Introduce el parametro 2")
+        		{
+        			error = true;
+        			alert("Esta funcion requiere del segundo parametro");
+        			return error;
+        		}
+        	}
+        	
+        	function esNumeroCadena(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("cadena");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(!isNaN(cadenaTexto)){
+        			error = true;
+        			alert("El contenido no puede ser un numero");
+        			return error;
+        		}
+        		
+        	}
+        	
+        	function esNumeroP1(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("parametro1");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(!isNaN(cadenaTexto)){
+        			error = true;
+        			alert("El contenido de parametro 1 no puede ser un numero");
+        			return error;
+        		}
+        		
+        	}
+        	
+        	function iniMayorFin(){
+        		var error = false; 
+        		var campop1 = document.getElementById("parametro1");
+        		var p1 = campop1.value;
+        		var campop2 = document.getElementById("parametro2");
+        		var p2 = campop2.value;
+        		
+        		if(p1&gt;p2){
+        			error = true;
+        			alert("Parametro 1 no puede ser mayor que parametro2");
+        			return error;
+        		}
+        	}
+        	
+        	function esNumeroP2(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("parametro2");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(!isNaN(cadenaTexto)){
+        			error = true;
+        			alert("El contenido de parametro2 no puede ser un numero");
+        			return error;
+        		}
+        		
+        	}
+        	
+        	function esLetraP1(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("parametro1");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(isNaN(cadenaTexto)){
+        			error = true;
+        			alert("El contenido de parametro 1 no puede ser una letra");
+        			return error;
+        		}
+        		
+        	}
+        	
+        	function esLetraoP2(){
+        		var error = false; 
+        		var campoNombre = document.getElementById("parametro2");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		if(isNaN(cadenaTexto)){
+        			error = true;
+        			alert("El contenido de parametro2 no puede ser una letra");
+        			return error;
+        		}
+        		
+        	}
+        	
+        	/*Lenght propio*/
+        	
+        	function miLength(){
+        		var campoNombre = document.getElementById("cadena");
+        		var cadenaTexto = campoNombre.value;
+        		
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			return;
+        		}
+        		
+        		var arrayCadena = cadenaTexto.split("");
+        		var longitud = 0;
+        		
+        		for (i in arrayCadena){
+        			longitud ++;
+        		}
+        		
+        		var campoResultado = document.getElementById('resultado');
+        		cambiarEstilo(campoResultado);
+        		campoResultado.value = "La longitud de la cadena es "+longitud;
+        	}
+        	
+        	
+        	/*-----------------------------------------------------------*/
+        	
+        	
+        	/*CharAt propio*/
+        	
+        	function miCharAt(){
+        		
+        		var campoTexto = document.getElementById("cadena");
+        		var campoPosicion = document.getElementById("parametro1");
+        		
+        		var cadenaTexto = campoTexto.value;
+        		var posicion = campoPosicion.value;
+        		
+        		//comprobacion campoCadena
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			
+        			return;
+        		}
+        		//combrobacion campoParametro1
+        		var vacio2 = errorParametro1();
+        		if (vacio2){
+        			return;
+        		}
+        		//comprobacion es numero p1
+        		var esNum = esLetraP1();
+        		if(esNum){
+        			return;
+        		}
+        		
+        		var caracter="";
+        		var arrayCadena = cadenaTexto.split("");
+        		var longitud = 0;
+        		
+        		for (i in cadenaTexto){
+        			longitud ++;
+        		}
+        		
+        		for (var i = 0; i&lt;longitud;i++){
+        			if (i == posicion){
+        				caracter = arrayCadena[i];
+        			}
+        		}
+        		var campoResultado = document.getElementById('resultado');
+        		cambiarEstilo(campoResultado);
+        		campoResultado.value = "En la cadena la posicion "+posicion+" contiene el caracter "+caracter;
+        		
+        	}
+        	
+        	/*------------------------------------------------------------*/
+        	
+        	/*indexOf propio*/
+        	
+        	function miIndexOf(){
+        		var campoTexto = document.getElementById("cadena");
+        		var campoCaracter = document.getElementById("parametro1");
+        		var cadenaTexto = campoTexto.value;
+        		var caracter = campoCaracter.value;
+        		var campoResultado = document.getElementById('resultado');
+        		cambiarEstilo(campoResultado);
+				//comprobacion campoCadena
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			
+        			return;
+        		}
+        		//combrobacion campoParametro1
+        		var vacio2 = errorParametro1();
+        		if (vacio2){
+        			return;
+        		}
+        		//comprobacion es numero p1
+        		var esNum = esNumeroP1();
+        		if(esNum){
+        			return;
+        		}
+
+        		var posicion = 0;
+        		var longitud = 0;
+        		
+        		for (i in cadenaTexto){
+        			longitud ++;
+        		}
+        		
+        		
+        		var arrayCadena = cadenaTexto.split("");
+        		
+        		for (var i = 0; i&lt;longitud;i++){
+        			if (arrayCadena[i] == caracter ){
+        				posicion = i;
+        				campoResultado.value="El caracter se encuentra en la posicion "+ posicion;
+        				return;
+        			}
+        		}
+        		estiloError(campoResultado);
+        		campoResultado.value = "No hay coincidencia";
+        	}
+        	
+        	/*------------------------------------------------------------*/
+        	
+        	/*lastIndexOf propio*/
+        	
+       		function miLastIndexOf(){
+        		
+        		var campodeTexto = document.getElementById("cadena");
+        		var campoCaracter = document.getElementById("parametro1");
+        		var cadenaTexto = campodeTexto.value;
+        		var caracter = campoCaracter.value;
+        		var campoResultado = document.getElementById('resultado');
+        		cambiarEstilo(campoResultado);
+        		
+        		//comprobacion campoCadena
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			
+        			return;
+        		}
+        		//combrobacion campoParametro1
+        		var vacio2 = errorParametro1();
+        		if (vacio2){
+        			return;
+        		}
+        		
+        		var posicion = 0;
+        		var longitud = 0; 
+        		
+        		for (i in cadenaTexto){
+        			longitud ++;
+        		}
+        		longitud--;
+				var arrayCadena = cadenaTexto.split("");
+				
+        		for (var i = longitud; i&gt;=0;i--){
+        			if (arrayCadena[i] == caracter){
+        				campoResultado.value = "El caracerter se encuentra en la posicion "+i;
+        				return;
+        			}
+        		}
+        		
+        	}
+        	
+        	/*------------------------------------------------------------*/
+        	
+        	/*Substring*/
+        	
+        	function miSubstring(){
+        		
+        		var campoTexto = document.getElementById("cadena");
+        		var campoIni = document.getElementById("parametro1");
+        		var campoFin = document.getElementById("parametro2");
+        		var cadenaTexto = campoTexto.value;
+        		var inicio = campoIni.value; 
+        		var fin = campoFin.value;
+        		alert(inicio);
+        		alert(fin);
+        		var campoResultado = document.getElementById('resultado');
+        		cambiarEstilo(campoResultado);
+        		
+        		//comprobacion campoCadena
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			return;
+        		}
+        		//combrobacion campoParametro1
+        		var vacio2 = errorParametro1();
+        		if (vacio2){
+        			return;
+        		}
+        		//combrobacion campoParametro1
+        		var vacio3 = errorParametro2();
+        		if (vacio3){
+        			return;
+        		}
+        		
+        		if(esLetraoP1()){
+        			return;
+        		}
+        		if(esLetraoP2()){
+        			return;
+        		}
+        		
+        		//comprobacion inicio mayor que fin
+        		if(iniMayorFin()){
+        			return;
+        		}
+        		
+        		var cadenaExtraida = "";
+        		var longitud = 0;
+        		
+        		for (i in cadenaTexto){
+        			longitud ++;
+        		}
+        		
+        		var arrayCadena = cadenaTexto.split("");
+        		
+        		for (var i = inicio; i&lt;fin;i++){
+        			cadenaExtraida+=arrayCadena[i];
+        		}
+        		alert(cadenaExtraida);
+        		campoResultado.value = cadenaExtraida;
+        		
+        	}
+        	
+        	/*------------------------------------------------------------*/
+        	
+        	/*MiConcat*/
+        	
+        	function miConcat(array1, array2){
+        		
+        		var longArray1=0;
+        		var longArray2=0;
+        		
+        		for (var i in array1){
+        			longArray1++;
+        		}
+        		
+        		for (var i in array2){
+        			longArray2++;
+        		}
+        		
+        		/*alert(longArray1);
+        		alert(longArray2);*/
+        		var longAux = longArray1+longArray2;
+        		
+        		var array3= new Array(longAux);
+        		
+    			for (var i = 0; i&lt; longArray1;i++){
+    				array3[i] = array1[i];
+    			}
+        		
+        		var iAux = 0;
+        		for (var index = longArray1 ; index&lt;longAux;index++ ){
+        			array3[index]=array2[iAux];
+        			iAux++;
+        		}
+        		return array3;
+        	}
+        
+        	/*------------------------------------------------------------*/
+        	//reverse
+        	
+        	function miReverse(array){
+     		var longitud=0;
+     		for(var i in array){
+     			longitud++;
+     		}
+     		
+     		//comprobacion campoCadena
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			
+        			return;
+        		}
+        		//combrobacion campoParametro1
+        		var vacio2 = errorParametro1();
+        		if (vacio2){
+        			
+        			return;
+        		}
+     		
+     		var array2=new Array(longitud);
+     		
+     		var a=longitud-1;
+     		for(var i=0;i&lt;longitud;i++){
+     			array2[a]=array[i];
+     			a--;
+     		}
+     		return array2;
+     	}
+     		
+        	//reverseCadena
+        	
+        	function miReverseCadena(){
+	     		var campoCadena = document.getElementById("cadena");
+	     		var cadena = campoCadena.value;
+	     		var longitud=0;
+	     		var campoResultado = document.getElementById('resultado');
+        		cambiarEstilo(campoResultado);
+	     		
+	     		//comprobacion campoCadena
+        		var vacio = errorCadenaVacia();
+        		if (vacio){
+        			
+        			return;
+        		}
+        		
+	     		
+	     		for(var i in cadena){
+	     			longitud++;
+	     		}
+	     		/*alert(longitud);*/
+	     		
+	     		var palabra = "";
+	     		
+	     		for(var a=(longitud-1);a&gt;=0;a--){
+	     			palabra+=cadena[a];
+	     			/*alert(palabra);*/
+	     		}
+	     		campoResultado.value = palabra;
+	     		//return palabra;
+     		}
+	     
+	     function miSplitC(){
+       		
+       		var cadena=document.getElementById("cadenasplit");
+       		var separador=document.getElementById("separadorSplit");
+       		var res=document.getElementById("resSplit");
+       		
+       		
+       		cadena=cadena.value;
+       		separador=separador.value;
+       		
+        	var cont=0;
+        	var arr;
+        	var arr2="";
+        	var posicion=0;
+        	var longSeparador=0;
+        	var longCadena=0;
+        	
+        	for(var i in separador){
+        		longSeparador++;
+        	}
+        	
+        	for(var i in cadena){	
+        		for(var a=0;a&lt;longSeparador;a++){
+               			arr2+=cadena[i++];
+        		        		}
+        		if(arr2==separador){
+        			cont++;
+        			arr2="";
+        		}
+        		else{
+        			arr2="";
+        		}
+        		longCadena++;
+        	}
+        	
+        	
+        	arr=new Array(cont+1);
+        	
+        	arr[posicion]="";
+        	for(var i=0;i&lt;longCadena; i++){
+        		
+        		for(var a=0;a&lt;longSeparador;a++){
+        			arr2+=cadena[i++];
+        			
+        		}
+        		
+        		if(arr2!=separador){
+        			i-=longSeparador; 
+        			
+        			arr[posicion]+=cadena[i];
+        			arr2="";
+        		}
+        		
+        		else{
+        				
+					 
+        			if((i-longSeparador)==0  || i==longCadena){
+        				arr2="";
+        				i-=1;
+	                   
+        			}
+        			else{
+        			
+        			posicion++;
+        			arr[posicion]="";
+        			arr2="";
+        			i-=1;
+        			}
+        		}
+        	}
+    
+        	for(i in arr){
+        	res.value+="posicion "+i+ "= "+arr[i]+"\\n";
+        }
+        
+        }
+	    
+	  /*Funcion para los campos de texto*/ 
+	    function cambiarEstilo(elemento)
+	    {
+	    	 elemento.style.color = 'black';
+	    	 elemento.style.fontStyle = 'normal';
+	    }
+	    
+	    function estiloError(elemento)
+	    {
+	    	 elemento.style.color = 'red';
+	    	 elemento.style.fontStyle = 'italic';
+	    }
+		     
+        &lt;/script&gt;
+    
+&lt;/head&gt;
+
+&lt;body&gt;
+        &lt;h1&gt;&lt;font color="#DF0101"&gt;FUNCIONES PROPIAS&lt;/font&gt; &lt;/h1&gt;&lt;hr/&gt;&lt;br /&gt;
+        &lt;form&gt;
+        
+        &lt;fieldset&gt;
+        &lt;legend&gt;Parametros de funciones&lt;/legend&gt;
+        &lt;input type="text" id="cadena"  value="Introduce una cadena" style="color:#BDBDBD; font-style:italic" onfocus="if(this.value=='Introduce una cadena'){this.value='';cambiarEstilo(this)}"/&gt;
+        &lt;input type="text" id="parametro1" value="Introduce el parametro 1" style="color:#BDBDBD; font-style:italic"  onfocus="if(this.value=='Introduce el parametro 1'){this.value='';cambiarEstilo(this)}"/&gt;
+        &lt;input type="text" id="parametro2" value="Introduce el parametro 2" style="color:#BDBDBD; font-style:italic"  onfocus="if(this.value=='Introduce el parametro 2'){this.value='';cambiarEstilo(this)}"/&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+        &lt;legend&gt;Funciones&lt;/legend&gt;
+        &lt;input type="button" value="Length" onclick="miLength()" /&gt;
+       
+        &lt;input type="button" value="CharAt" onclick="miCharAt()" /&gt;
+        
+        &lt;input type="button" value="IndexOf" onclick="miIndexOf()"/&gt;
+        
+        &lt;input type="button" value="LastIndexOf" onclick="miLastIndexOf()"/&gt;
+        
+        &lt;input type="button" value="SubString" onclick="miSubstring()"/&gt;
+        
+        &lt;input type="button" value="Reverse" onclick="miReverseCadena()" /&gt;&lt;br /&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+        &lt;legend&gt;Resultado&lt;/legend&gt;
+        &lt;textarea id="resultado" rows="5" cols="100"&gt;&lt;/textarea&gt;
+        &lt;/fieldset&gt;
+       
+
+       
+        &lt;fieldset&gt;
+        &lt;legend&gt;Split&lt;/legend&gt;
+        &lt;input type="text" id="cadenasplit" value="Cadena" style="color:#BDBDBD; font-style:italic"&gt;
+    	&lt;input type="text" id="separadorSplit" value="CaracterSeparador"style="color:#BDBDBD; font-style:italic"&gt;
+    	&lt;textarea type="text" id="resSplit" rows="2" cols="50" style="color:#BDBDBD; font-style:italic"&gt; &lt;/textarea&gt;
+    	&lt;input type="button" value="Split" onclick="miSplitC()" &gt;&lt;br&gt;&lt;br&gt;
+      
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+        	&lt;legend&gt;Codigo&lt;/legend&gt;
+        	&lt;input type="button" value="Ver Codigo" onclick="window.location='FuncionesPropias.txt'"/&gt;
+        &lt;/fieldset&gt;
+        &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+	</pre>
+	
+		 </fieldset>
+		 <fieldset>
+	        	<legend>Codigo</legend>
+	        	<input type="button" value="Ver Ejecucion" onclick="window.location='FuncionesPropias.html'"/>
+	     </fieldset>
+    </form>
+    </body>
+</html>
+

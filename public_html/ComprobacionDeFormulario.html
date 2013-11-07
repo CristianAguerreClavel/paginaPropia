@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Formulario</title>
+		
+		<script language="JavaScript">
+			
+			var cNombre="Nombre";
+			var cApellido="Apellidos"
+			
+			function validacionCampos(){
+				var nombre = document.getElementById("nombre").value;
+				var apellido = document.getElementById('apellido').value;
+				
+				if(apellido == cApellido){
+					var apellidoError = document.getElementById('apellidoR');
+					apellidoError.style = "color:RED;font-style:italic"
+					apellidoError.value = "Introduzca un apellido";
+				}
+				if(nombre == cNombre){
+					var nombreError = document.getElementById('nombreR');
+					nombreError.style = "color:RED;font-style:italic"
+					nombreError.value = "Introduzca un nombre";
+				}
+				
+			}
+			
+			function obtencionDatos(){
+				//OBTENCION DE LOS VALORES
+				/*------------------------------------------------------*/
+				var nombre = document.getElementById("nombre").value;
+				var apellido = document.getElementById('apellido').value;
+				//var direccion = document.getElementById('direccion').value;
+				
+				var elementos = document.getElementsByName("rol");//RadioButton
+					
+					
+								
+				//SET DE VALORES RECIBIDOS
+				/*------------------------------------------------------------*/
+				document.getElementById('nombreR').value = nombre;
+				document.getElementById('apellidoR').value = apellido;
+				var rolR = document.getElementById('rolR');
+				var aux ="";
+				//document.getElementById('direcionR').value = (text)direccion;
+				
+				for(var i=0; i<elementos.length; i++) {//Comprobacion del elemento selecionado en el radioButoon
+					 if(elementos[i].checked){
+					  	aux = elementos[i].value;
+					 }
+				}
+				rolR.value = aux;
+				
+				
+				//COMPORBACION DE LOS CHECKBOX
+				/*-------------------------------------------------------------------*/
+				var aficion = document.getElementById('aficionesR')
+				var elemento = document.getElementById("futbol");
+				aficion.value = "";
+				if(elemento.checked){
+					aficion.value += " "+elemento.value;
+				}
+				elemento = document.getElementById("baloncesto");
+				if( elemento.checked){
+					aficion.value += " "+elemento.value;
+				}
+				elemento = document.getElementById("natacion");
+				if( elemento.checked){
+					aficion.value += " "+elemento.value;
+				}
+				
+				//COMPORBACION DE LA LISTA DE PAISES
+				/*-----------------------------------------------------------------------*/
+				var pais = document.getElementById('paisR');
+				var lista = document.getElementById("opciones");
+				 
+				// Obtener el valor de la opción seleccionada
+				var valorSeleccionado = lista.options[lista.selectedIndex].value;
+				 pais.value = valorSeleccionado;
+				 
+				 validacionCampos();
+			}
+			
+			/*Funcion para los campos de texto*/ 
+		    function cambiarEstilo(elemento){
+		    	 elemento.style.color = 'black';
+		    	 elemento.style.fontStyle = 'normal';
+		    }
+		    
+		    function estiloError(elemento){
+		    	 elemento.style.color = 'red';
+		    	 elemento.style.fontStyle = 'italic';
+		    }
+			
+		</script>
+		
+	</head>
+	<body>
+		<form>
+			<fieldset>
+				<legend><font color="#DF0101"><b>DATOS PERSONALES</b></font></legend>
+				<input type="text" id="nombre" value="Nombre"  style="color:#585858;font-style:italic" onfocus="if(this.value=='Nombre'){this.value='';cambiarEstilo(this)}"/> 
+				<input type="text" id="apellido" value="Apellidos"  style="color:#585858;font-style:italic" onfocus="if(this.value=='Apellidos'){this.value='';cambiarEstilo(this)}"/> 
+				<select id="opciones" name="opciones">
+				  <option value="España">España</option>
+				  <option value="Fracia">Francia</option>
+				  <option value="Inglaterra">Inglaterra</option>
+				  <option value="Alemania">Alemania</option>
+				</select>
+				<br />
+				<br /><textarea id="direccion" style="color:#585858;font-style:italic" onfocus="this.value='';cambiarEstilo(this)">Introduce la direccion</textarea>
+				<br />
+				Funcion en la empresa: 
+				<br />
+				<input type="radio" value="alumno" name="rol" id="rolAlumno"/> Alumno <br />
+				<input type="radio" value="profesor" name="rol" id="rolProfesor"/> Profesor <br />
+				<input type="radio" value="ninguno" name="rol" id="rolNinguno"/> Ninguno de los anteriores
+			</fieldset>
+			
+			<fieldset>
+				<legend><font color="#DF0101"><b>OTROS DATOS DE INTERES</b></font></legend>
+				Aficiones:<br />
+				<input type="checkbox" value="Futbol" name="fultbol" id="futbol"/> Futbol<br />
+				<input type="checkbox" value="Baloncesto" name="baloncesto" id="baloncesto"/> Baloncesto<br />
+				<input type="checkbox" value="Natacion" name="natacion" id="natacion"/> Natacion<br />
+			</fieldset>
+			<hr /><hr /><hr />
+			<fieldset>
+				<legend><font color="#DF0101"><b>OBTENCION DE DATOS</b></font></legend>
+				Nombre<input type="text" id="nombreR" />
+				Apellidos<input type="text" id="apellidoR" />
+				Pais<input type="text" id="paisR" /><br />
+				Direccion<input type="text" id="direccionR" /><br />
+				Funcion<input type="text" id="rolR" /><br />
+				Aficiones<input type="text" id="aficionesR" /><br />
+				
+				<input type="button" value="Validar" onclick="obtencionDatos()" />
+				<input type="button" value="Ver Codigo" onclick="window.location='codigoComprobacionDeFormulario.html'"/>
+				
+			</fieldset>
+			
+		</form>
+	</body>
+</html>
+
