@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="EstiloPricipal.css" rel="stylesheet" type="text/css"  title="Color" />
+        <title>Cristian aguerre clavel</title>
+    </head>
+    <body background="Img/3.jpg">
+
+	<table border="0" width="100%">
+		
+		<tr height="15%" width="100%">
+			
+			
+			<td valign="bottom" colspan="2" >
+				<img src="Img/CABE2.png" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td width="189" height="100%">
+				<h3>
+				
+    			</h3>
+			</td>
+			
+			<td>
+				<div id="contenido">
+				<div id="presentacion">
+						<iframe id="Present" src="Present.html" width="100%" height="100%"></iframe>
+					
+				</div>
+				<div id="p2">
+					
+				</div>
+				<div id="ej1">
+					<table border="1" width="100%" height="100%">
+					<tr>
+						<td width="50%" height="50%"><iframe id="ej1" src="Actividad1.html" width="100%" height="100%"></iframe></td>
+						<td width="50%" height="50%"><iframe id="ej1" src="Actividad1.txt" width="100%" height="100%"></iframe></td>
+					</tr>
+					</table>
+				</div>
+				</div>
+			</td>
+			
+		</tr>
+	</table>
+</body>
+</html>

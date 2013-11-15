@@ -1,0 +1,38 @@
+body {
+
+}
+
+#contenido  { 
+  background-image: url('');
+  
+  
+   background-repeat:repeat;
+  height: 75%;
+  left: 20%; 
+  overflow: hidden; 
+  position: absolute; 
+  top: 12em; 
+  width: 75%; 
+
+
+  
+}
+
+#contenido div { 
+  height: 100%; 
+  overflow: auto; 
+  width: 100%; 
+
+}
+
+A:link {text-decoration:none;color:#DF0101;}
+
+
+A:visited {text-decoration:none;color:#DF0101;}
+
+
+A:active {text-decoration:underline;color:#3B0B0B;}
+
+
+A:hover {text-decoration:underline;color:#8A0808;}
+

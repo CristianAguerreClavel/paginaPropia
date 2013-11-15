@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="EstiloP1.css">
+        <title>Practica 1</title>
+        <script language="JavaScript">
+    	
+    	//1º A partir de los siguiente valores que se proporciona: true, 5, false, "hola", "adios", 2
+    	/*
+		 *	a) Crear y asignar variables para cada valor
+		 */
+		var booleano1 = true;
+		var booleano2 = false;
+		var num1 = 5;
+		var num2 = 2;
+		var string1 = "hola";
+		var string2 = "adios"
+		
+		/*
+		 * b) Determinar cual de los dos elementos de texto es mayor
+		 */
+		function mayorString(){
+			if(string1.length > string2.length){
+				alert("La cadena "+string1+" es mayor que "+string2);
+			}else{
+				alert("La cadena "+string2+" es mayor que "+string1);
+			}
+		 	
+		}
+		
+		/*
+		 * c) Utilizando exclusivamente los dos valores booleanos, determinar los 
+		 * operadores necesarios para obtener un resultado true y otro resultado false
+		 */
+		
+		
+		
+		/*
+		 * d) Determinar el resultado de las cinco operaciones matemáticas realizadas
+		 *  con los dos elementos numéricos
+		 */
+		function suma(){
+			var result = num1+num2;
+			alert(result);
+			return result;
+		}
+		
+		function resta(){
+			var result = num1-num2;
+			return result;
+		}
+		
+		function producto(){
+			var result = num1*num2;
+			return result;
+		}
+		
+    	function division(){
+			var result = num1/num2;
+			return result;
+		}
+		
+		function resto(){
+			var result = num1%num2;
+			return result;
+		}
+		
+		//2º. Pedir al usuario tres valores numéricos y determinar el orden ascendente de dichos valores
+		function ordenarAscendente(){
+			var num1 = prompt("Introduce el 1º numero");
+			var num2 = prompt("Introduce el 2º numero");
+			var num3 = prompt("Introduce el 3º numero");
+			
+			var numero = [];
+			
+			
+			if (num1 < num2 && num1 < num3){
+				numero[0]=num1;
+			
+				if (num2 < num3){
+				 	numero[1]=num2;
+				 	numero[2]=num3;
+				}
+			}
+			
+			if (num2 < num1 && num2 < num3){
+				numero[0]=num2;
+			
+				if (num1 < num3){
+				 	numero[1]=num1;
+				 	numero[2]=num3;
+				}
+			}
+			
+			if (num3 < num2 && num3 < num1){
+				numero[0]=num3;
+				
+				if (num3 < num1){
+				 	numero[1]=num3;
+				 	numero[2]=num1;
+				 }
+			}
+			
+			alert(numero[0]);
+			alert(numero[1]);
+			alert(numero[2]);
+		}
+
+		</script>
+    
+    </head>
+    <body>
+        <h1>Practica 1</h1><hr />
+        <fieldset><legend>Ejercicios A,B,C,D</legend>
+        	<table>
+        		<tr>
+        			<td width="550px">Cual de los elementos de texto es mayor: "hola","Adios"  </td>
+        			<td><input type="button" value="Ejecutar" onclick="mayorString()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Determinar los operadores necesarios para obtener un resultado true y otro resultado false</td>
+        			<td><input type="button" value="Ejecutar" onclick="booleanos()" /></td>
+        		</tr>
+        		
+        		<tr>
+        			<td width="550px">Introducir tres numero y ordenarlos ascendentemente: </td>
+        			<td><input type="button" value="Ejecutar" onclick="ordenarAscendente()" /></td>
+        		</tr>
+        		
+        		
+        		
+        	</table>
+        	
+        </fieldset>
+    </body>
+</html>
+

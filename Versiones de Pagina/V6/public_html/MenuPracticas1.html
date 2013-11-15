@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="EstiloP1.css">
+        <title>Practica 1</title>
+        <script language="JavaScript">
+	
+			function mouseEnterDiv(div){
+				div.style.backgroundColor= "#F6CECE";
+				div.style.width = "430px";
+				div.zIndez = "100";
+			}
+			
+			function mouseExitDiv(div){
+				div.style.backgroundColor= "white";
+				div.style.width = "400px";
+				div.zIndez = "1";
+			}
+		
+		</script>
+    
+    </head>
+    <body>
+        <h1>MENU DE PRACTICAS</h1><hr />
+        <div  style="position: absolute; left: 10px; top: 70px;border: 0.5px"onmouseover="mouseEnterDiv(this)" onmouseout="mouseExitDiv(this)"  
+        onclick="window.location='Practica1.html'" >
+        	<table>
+        		<tr>
+        			<td bgcolor="red" colspan="2" ><h4>Practica 1</h4></td>
+        			
+	        	</tr>
+	        	<tr>
+	        		<td><ul>
+	        			<li>String mas largo</li>
+	        			<li>Valores booleanos</li>
+	        			<li>Ordenacion de numeros</li>
+	        		</ul></td>
+	        		<td><td><img src="./Img/P1A.png" /></td></td>
+	        	</tr>
+	        	
+        	</table>
+        </div>
+        
+        <div  style="position: absolute; left: 400px; top: 70px" onmouseover="mouseEnterDiv(this)" onmouseout="mouseExitDiv(this)">
+        	<table>
+        		
+        		<tr>
+        			<td><h2>1º- B</h2></td>
+	        	</tr>
+	        	
+        		<tr>
+        			<td><p>Determinar cual de los dos elementos de texto es mayor: "hola", "adios"</p></td>
+	        	</tr>
+        		
+        		<tr>
+        			<td><input type="button" value="Comprobar" onclick="mayorString()" /></td>
+	        	</tr>
+				
+	        </table>
+        </div>
+        
+    </body>
+</html>
