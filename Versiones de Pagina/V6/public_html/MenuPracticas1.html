@@ -7,16 +7,36 @@
         <title>Practica 1</title>
         <script language="JavaScript">
 	
-			function mouseEnterDiv(div){
+			//DIV QUE SE VA DE PASEO
+			/*function mouseEnterDiv(div){
+				var posInicialPx = div.style.left;//Obtencion del valor left de la div que llama la funcion
+				
+				var posInicialA = posInicialPx.split("px");//Extraemos en un array el valor numerico, es decir, quitamos la cadena px;
+				parseInt(posInicialA,10);//Convertimos la cadena en un int de base 10;
+				var posInicialN = posInicialA[0]-5;//realizamos la operacion con el numero en base 10
+				
 				div.style.backgroundColor= "#F6CECE";
-				div.style.width = "430px";
-				div.zIndez = "100";
+				div.style.zIndex = "100";
+				div.style.width = "500px";
+				div.style.heigth = "500px";
+				
+				var posFinalPx = posInicialN+"px";//Convertimos posInicialN en un string y le añadimos la cadena px
+				div.style.left = posFinalPx;
+				
+				
+			}*/
+			
+			function mouseEnterDiv(div){
+				div.className = "blackbox:hover"				
+				
 			}
 			
 			function mouseExitDiv(div){
+				
 				div.style.backgroundColor= "white";
 				div.style.width = "400px";
-				div.zIndez = "1";
+				div.style.zIndex = "1";
+				
 			}
 		
 		</script>
@@ -24,11 +44,10 @@
     </head>
     <body>
         <h1>MENU DE PRACTICAS</h1><hr />
-        <div  style="position: absolute; left: 10px; top: 70px;border: 0.5px"onmouseover="mouseEnterDiv(this)" onmouseout="mouseExitDiv(this)"  
-        onclick="window.location='Practica1.html'" >
+        <div  class="blackbox" style="position: absolute; left: 10px; top: 100px;border: 0.5px;" onclick="window.location='Practica1.html'" >
         	<table>
         		<tr>
-        			<td bgcolor="red" colspan="2" ><h4>Practica 1</h4></td>
+        			<td bgcolor="#B40404" colspan="3" ><h4>Practica 1</h4></td>
         			
 	        	</tr>
 	        	<tr>
@@ -37,28 +56,47 @@
 	        			<li>Valores booleanos</li>
 	        			<li>Ordenacion de numeros</li>
 	        		</ul></td>
-	        		<td><td><img src="./Img/P1A.png" /></td></td>
+	        		<td><td><img src="./Img/P1A.png" border="1px"/></td></td>
 	        	</tr>
 	        	
         	</table>
         </div>
         
-        <div  style="position: absolute; left: 400px; top: 70px" onmouseover="mouseEnterDiv(this)" onmouseout="mouseExitDiv(this)">
+        <div class="blackbox" style="position: absolute; left: 500px; top: 100px">
         	<table>
-        		
         		<tr>
-        			<td><h2>1º- B</h2></td>
+        			<td bgcolor="#B40404" colspan="3" ><h4>Practica 2</h4></td>
+        			
+	        	</tr>
+	        	<tr>
+	        		<td><ul>
+	        			<li>String mas largo</li>
+	        			<li>Valores booleanos</li>
+	        			<li>Ordenacion de numeros</li>
+	        		</ul></td>
+	        		<td><td><img src="./Img/P1A.png" border="1px"/></td></td>
 	        	</tr>
 	        	
+        	</table>
+        </div>
+        
+           
+        <div class="blackbox" style="position: absolute; left: 10px; top: 450px" >
+        	<table>
         		<tr>
-        			<td><p>Determinar cual de los dos elementos de texto es mayor: "hola", "adios"</p></td>
+        			<td bgcolor="#B40404" colspan="3" ><h4>Practica 3</h4></td>
+        			
 	        	</tr>
-        		
-        		<tr>
-        			<td><input type="button" value="Comprobar" onclick="mayorString()" /></td>
+	        	<tr>
+	        		<td><ul>
+	        			<li>String mas largo</li>
+	        			<li>Valores booleanos</li>
+	        			<li>Ordenacion de numeros</li>
+	        		</ul></td>
+	        		<td><td><img src="./Img/P1A.png" border="1px"/></td></td>
 	        	</tr>
-				
-	        </table>
+	        	
+        	</table>
         </div>
         
     </body>
