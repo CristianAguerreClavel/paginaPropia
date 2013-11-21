@@ -4,12 +4,42 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Presentacion</title>
+        
+        
     </head>
     <body>
+    	
+    	<script language="JavaScript">
+        	
+        	function cambiarImg(){
+        		var aleatorio = Math.floor(Math.random()*4);
+        		
+				var srcs = new Array();
+				srcs[0] = "Img/1.png";
+				srcs[1] = "Img/2.jpg";
+				srcs[2] = "Img/3.jpg";
+				srcs[3] = "Img/4.jpg";
+				srcs[4] = "Img/5.jpg";
+
+        		var img = document.getElementById("im1");
+        		img.src = srcs[aleatorio];
+        		
+        		
+        	}
+        	
+        	window.onload = function() {
+  				setInterval(cambiarImg, 5000);
+			}
+        	
+        </script>
+    	
     	        <h1><font color="#DF0101"><b>PRESENTACION</b></font></h1><hr />
 		        <p>
 		        	Mi nombre es Cristian Aguerre Clavel, tengo 23 a&ntilde;os, actualmente estudio Desarrollo de aplicaciones multiplataforma.
 		        </p>
+		        <div id="div1">
+		        	<img id="im1" src="Img/the_red_line_by_lozha-d2yiyvg.png" />
+		        </div>
         </table>
     </body>
 </html>
