@@ -7,6 +7,7 @@
         <title>Practica 1</title>
         <script language="JavaScript">
     	
+    	//TODO Implementar robustez a todas las funciones
     	//1º A partir de los siguiente valores que se proporciona: true, 5, false, "hola", "adios", 2
     	/*
 		 *	a) Crear y asignar variables para cada valor
@@ -16,7 +17,7 @@
 		var num1 = 5;
 		var num2 = 2;
 		var string1 = "hola";
-		var string2 = "adios"
+		var string2 = "adios";
 		
 		/*
 		 * b) Determinar cual de los dos elementos de texto es mayor
@@ -83,23 +84,35 @@
 				 	numero[1]=num2;
 				 	numero[2]=num3;
 				}
+				else{
+					numero[1]=num3;
+				 	numero[2]=num2;
+				}
 			}
 			
-			if (num2 < num1 && num2 < num3){
+			else if (num2 < num1 && num2 < num3){
 				numero[0]=num2;
 			
 				if (num1 < num3){
 				 	numero[1]=num1;
 				 	numero[2]=num3;
 				}
+				else{
+					numero[1]=num3;
+				 	numero[2]=num1;
+				}
 			}
 			
-			if (num3 < num2 && num3 < num1){
+			else if (num3 < num2 && num3 < num1){
 				numero[0]=num3;
 				
 				if (num3 < num1){
 				 	numero[1]=num3;
 				 	numero[2]=num1;
+				 }
+				 else{
+				 	numero[1]=num1;
+				 	numero[2]=num3;
 				 }
 			}
 			
@@ -107,13 +120,242 @@
 			alert(numero[1]);
 			alert(numero[2]);
 		}
+		
+		
+		// Completar las condiciones de los if del siguiente script 
+		//para que los mensajes de los alert() se muestren siempre de forma correcta
+		function ejer3(){
+			var numero1 = 5;
+			var numero2 = 8;
+			 
+			if(numero1<numero2) {
+			  alert("numero1 no es mayor que numero2");
+			}
+			
+			if(numero2>0) {
+			  alert("numero2 es positivo");
+			}
+			if(numero1>!0) {
+			  alert("numero1 es negativo o distinto de cero");
+			}
+			numeroAux = numero1 ++;
+			if(numeroAux<=numero2) {
+			  alert("Incrementar en 1 unidad el valor de numero1 no lo hace mayor o igual que numero2");
+			}
 
+		}
+		
+		/*Utilizando la estructura for, crear un script que calcule el factorial de un número entero que el
+		usuario introducirá por teclado. Validar la entrada de que sea un número entero, en el caso de
+		que no introduzca un valor numérico adecuado, mostraremos una caja de aviso mediante alert y
+		volveremos a solicitarle un número válido*/
+		
+		function factorial(){
+			var numero = prompt("Introduce un numero para calcular su factorial: ");
+			var numeroAux = numero;
+			var result = 1;
+			for (var i=numero;i>1; i--)
+			{
+				result = numeroAux * result;
+				numeroAux--;
+			}
+			alert("El factorial de "+numero+" es "+result);
+			
+			continuarEjecucion("factorial();");
+		}
+		
+		function fibonaci(){
+			var numero = prompt("Introduce el numero para la funcion de fibonaci: ");
+			var numeros = new Array(numero);//Almacenaremos la serie de numero en este array con el tamaño de numero
+			var numeroActual = 1;
+			var numeroAnterior = 0;
+			var result = 0;
+			var resultFinal = 0;
+			for (var i = 0;i<numero;i++){
+				result = numeroActual  + numeroAnterior;
+				numeroAnterior = numeroActual;
+				numeroActual = result;
+				resultFinal+=result;
+				numeros[i]=result;
+			}
+			
+			var serie="";//variable para contener la serie de numero en cadena
+			var numeroInt = 0;
+			for (var cont = 0; cont<numeros.length;cont++){
+				numeroString = numeros[cont]+"";//Conversion de int a string "forzada"
+				serie += numeroString+",";
+			}
+			alert("La serie es: "+serie);
+			alert("La suma total de la serie es: "+resultFinal);
+			
+			continuarEjecucion("fibonaci();");
+		}
+
+		function continuarEjecucion(funcion){
+			//Comprobacion si se desea continuar ejecutando
+			var r=confirm("Desea calcular denuevo:");
+			if (r==true){
+			  eval(funcion);//de esta forma podemos volver a llamar a la funcion cuyo nombre a sido pasado como parametro
+			}
+			else{
+			  return;
+		  	}
+		}
+		
+		
+		/*-----------------------------------------------------------*/
+		/*-----------------------APARTADO B--------------------------*/
+		/*-----------------------------------------------------------*/
+		/*Escribir el código de una función a la que se pasa como parámetro un número entero y devuelve
+		como resultado una cadena de texto que indica si el número es par o impar. Mostrar por pantalla el
+		resultado devuelto por la función.*/
+		function numeroParOImpar(numero){
+			if (numero%2 == 0){
+				alert("El numero introducido es par");
+			}
+			else{
+				alert("El numero introducido es impar");
+			}
+		}
+		
+		function obtenerNumero(){
+			var numero = prompt("Introduce un numero");
+			return numero;
+		}
+		
+		/*Calculo de la letra de DNI*/
+		function comprobacionLetraDni(){//TODO añadir roboustez
+			var letras = new Array('T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S',
+								   'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T');
+			var DniCompleto = prompt("Introduzca su DNI (letra incluida)");
+			var DniLetra = DniCompleto.substring(8);
+			var DniNumero = DniCompleto.substring(0,8);
+			DniNumero = parseInt(DniNumero,10);//Conversion de la variable a tipo int
+			alert(DniNumero);
+			if(DniNumero<0 || DniNumero>99999999){
+				alert("El numero de DNI introducido no es valido");
+				return;
+			}
+			var restoDivision = DniNumero%23;
+			
+			if (DniLetra!= letras[restoDivision]){
+				alert("La letra introducida no es correcta");
+				return;
+			}
+			else {
+				alert("El DNI introducido es correcto");
+			}
+		}
+		
+		/*Convertir en un Array los elementos del ejercicio 1 del apartado A y listar todos los elementos
+		 * mostrando el resultado mediante una tabla en Html
+		 */
+		function contruirTabla(){
+			var datos = new Array('true','false',5,2,"Hola","Adios");
+			
+			var tabla = document.createElement("table");
+			var fila = document.createElement("tr");
+			
+			//Cabeceras de la tabla
+			for(var i = 0;i<datos.length;i++){
+				
+				var columna = document.createElement("td");
+				var contenido = document.createTextNode("Columna "+i);
+				columna.appendChild(contenido);
+				fila.appendChild(columna);
+				tabla.appendChild(fila);
+				
+			}
+			
+			var fila2 = document.createElement("tr");//Creamos una nueva fila
+			//Datos de la tabla
+			for(var i = 0;i<datos.length;i++){
+				var columna = document.createElement("td");
+				var contenido = document.createTextNode(datos[i]);
+				columna.appendChild(contenido);
+				fila2.appendChild(columna);
+				tabla.appendChild(fila2);
+				
+			}
+			tabla.setAttribute("border","2");
+			
+			document.body.appendChild(tabla);
+			//alert("fin de funcion");
+		}
+		
+		function entradaDatos(){
+			var num1 = prompt("Introduce el 1º numero");
+			var num2 = prompt("Introduce el 2º numero");
+			var num3 = prompt("Introduce el 3º numero");
+			
+			maxMedyMin(num1,num2,num3);
+		}
+		
+		function maxMedyMin (num1,num2,num3){
+			var numero = new Array(3);
+			if (num1 > num2 && num1 > num3){
+				numero[0]="El mayor es: "+num1;
+				if (num2 > num3){
+					 	numero[1]="El mediano es: "+num2;
+					 	numero[2]="El menor es: "+num3;
+				}else{
+					numero[1]="El mediano es: "+num3;
+					numero[2]="El menor es: "+num2;
+				}
+			}
+			else if (num2 > num1 && num2 > num3){
+				numero[0]="El mayor es: "+num2;
+			
+				if (num1 > num3){
+				 	numero[1]="El mediano es: "+num1;
+				 	numero[2]="El menor es: "+num3;
+				}
+				else {
+					numero[1]="El mediano es: "+num3;
+				 	numero[2]="El menor es: "+num1;
+				}
+			}
+			else if (num3 > num2 && num3 > num1){
+				numero[0]="El mayor es: "+num3;
+				
+				if (num3 > num1){
+				 	numero[1]="El mediano es: "+num3;
+				 	numero[2]="El menor es: "+num1;
+				 }
+				 else{
+				 	numero[1]="El mediano es: "+num1;
+				 	numero[2]="El menor es: "+num3;
+				 }
+			}
+			
+			muestraOrdenValores(numero);
+		}
+		
+		function muestraOrdenValores(numero){
+			alert(numero[0]);
+			alert(numero[1]);
+			alert(numero[2]);
+			continuarEjecucion("enradaDatos();");//TODO cambiar funcion
+		}
+		
+		function repiteFinalizaProceso(funcion){
+			//Comprobacion si se desea continuar ejecutando
+			var r=confirm("Desea continuar s/n:");
+			if (r==true){
+			  eval(funcion);//de esta forma podemos volver a llamar a la funcion cuyo nombre a sido pasado como parametro
+			}
+			else{
+				alert("Ha decidido finalizar el proceso");
+			    return;
+		  	}
+		}
 		</script>
     
     </head>
     <body>
         <h1>Practica 1</h1><hr />
-        <fieldset><legend>Ejercicios A,B,C,D</legend>
+        <fieldset>
+        	<legend>ARARTADO A</legend>
         	<table>
         		<tr>
         			<td width="550px">Cual de los elementos de texto es mayor: "hola","Adios"  </td>
@@ -128,12 +370,45 @@
         			<td width="550px">Introducir tres numero y ordenarlos ascendentemente: </td>
         			<td><input type="button" value="Ejecutar" onclick="ordenarAscendente()" /></td>
         		</tr>
-        		
-        		
-        		
+        		<tr>
+        			<td width="550px">Modificar los if para que se muestren los alert corrrectamente </td>
+        			<td><input type="button" value="Ejecutar" onclick="ejer3()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Calcular el factorial de un numero </td>
+        			<td><input type="button" value="Ejecutar" onclick="factorial()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Serie fibonaci de un numero </td>
+        			<td><input type="button" value="Ejecutar" onclick="fibonaci()" /></td>
+        		</tr>
         	</table>
-        	
+        </fieldset>
+        
+        <fieldset>
+        	<legend>APARTADO B</legend>
+        	<table>
+        		<tr>
+        			<td width="550px">Numero par o impar</td>
+        			<td><input type="button" value="Ejecutar" onclick="numeroParOImpar(obtenerNumero())" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Comprobacion letra de DNI</td>
+        			<td><input type="button" value="Ejecutar" onclick="comprobacionLetraDni();" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Crear tabla dinamica</td>
+        			<td><input type="button" value="Ejecutar" onclick="contruirTabla()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Ordenar 3 numeros version modificada</td>
+        			<td><input type="button" value="Ejecutar" onclick="entradaDatos()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Ordenacion de un array de 15 alementos</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('p1TablaBurbuja.html')" /></td>
+        		</tr>
+        	</table>
         </fieldset>
     </body>
 </html>
-

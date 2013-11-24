@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Informacion de cadena</title>
+		
+		<script language="JavaScript">
+			
+			function tomarCadena(funcionEjecutar){
+				var cadena = prompt("Introduce una cadena");
+				eval(funcionEjecutar+'(cadena);');//De esta forma puedo llamar a cualquier funcion pasa como parametro y ademas pasarle como parametro la variable cadena
+			}
+			
+			/*
+			 * 2º Leer una cadena de texto mediante el método prompt() y generar un array con las palabras
+			 * que contiene. Posteriormente, mostrar la siguiente información. Desarrollar el Script, haciendo
+			 * uso de funciones (documentar y añadir los comentarios que consideréis necesario)
+			 */
+			function cadenaToArray(cadena){
+				var arrayPalabras = cadena.split(" ");
+				
+				mostrarArray(arrayPalabras);
+				numeroPalabras(arrayPalabras);
+				primeraYUltimaPalabra(arrayPalabras);
+				var arrayReverse = palabrasReverse(arrayPalabras);
+				ordenarPalabrasAscendente(arrayPalabras);
+				ordenarPalabrasDescendente(arrayPalabras);
+			}
+			
+			function mostrarArray(arrayPalabras){
+				for (var i in arrayPalabras){
+					alert(arrayPalabras[i]+" ->  posicion: ["+i+"]");
+				}
+			}
+			
+			function numeroPalabras(arrayPalabras){
+				var cont = 0;
+				for (var i in arrayPalabras){
+					cont ++;
+				}
+				var text = document.getElementById("textLongitud");
+				text.value = cont;
+				//alert("La cadena esta formada por "+cont+" palabras");
+			}
+			
+			function primeraYUltimaPalabra(arrayPalabras){
+				var primera = arrayPalabras[0];
+				var ultima = arrayPalabras[arrayPalabras.length-1];
+				alert("La primera palabra es: "+primera);
+				alert("La ultima palabra es: "+ultima);
+			}
+			
+			function palabrasReverse(arrayPalabras){
+				var arrayReverse = new Array();
+				
+				var cont = arrayPalabras.length-1;
+				
+				for (var i = 0; i < arrayPalabras.length; i++){
+					arrayReverse[i] = arrayPalabras[cont];
+					cont--;
+				}
+				
+				return arrayReverse;
+			}
+			
+			var contTabla = 0;
+			function mostrarVectorTabla(vector, id){//Dibuja la tabla en la columna de la tabla principal que se le pasa como ID
+				var tabla = document.createElement("table");
+				var fila = document.createElement("tr");
+				
+				//Cabeceras de la tabla
+				for(var i = 0;i<vector.length;i++){
+					var columna = document.createElement("td");
+					var contenido = document.createTextNode(vector[i]);
+					columna.appendChild(contenido);
+					fila.appendChild(columna);
+					tabla.appendChild(fila);
+				}
+				var columna1 = document.getElementById("columna"+id);
+				tabla.setAttribute("border","2");
+				tabla.setAttribute("cellspacing","2");
+				tabla.setAttribute("cellpading","2");
+				columna1.appendChild(tabla);
+			}
+			
+			function ordenarPalabrasAscendente(arrayCadena){
+				var aux =0;//Variable auxiliar para no perder la informacion de la casilla a escribir
+				var arrayAuxiliar = new Array();
+				
+				for(var i in arrayCadena){//Copia del array para no perder el original
+					arrayAuxiliar[i]=arrayCadena[i];
+				}
+				
+				for(var i=0;i<arrayAuxiliar.length;i++){
+					for(var cont=i;cont<arrayAuxiliar.length;cont++){			
+						if(arrayAuxiliar[i]>arrayAuxiliar[cont]){			
+							var aux=arrayAuxiliar[i];				
+							arrayAuxiliar[i]=arrayAuxiliar[cont];
+							arrayAuxiliar[cont]=aux;	
+						}
+					}
+				}
+				mostrarVectorTabla(arrayAuxiliar,1);
+			}
+			
+			function ordenarPalabrasDescendente(arrayCadena){
+				var aux =0;//Variable auxiliar para no perder la informacion de la casilla a escribir
+				var arrayAuxiliar = new Array();
+				
+				for(var i in arrayCadena){//Copia del array para no perder el original
+					arrayAuxiliar[i]=arrayCadena[i];
+				}
+				
+				for(var i=0;i<arrayAuxiliar.length;i++){
+					for(var cont=i;cont<arrayAuxiliar.length;cont++){			
+						if(arrayAuxiliar[i]<arrayAuxiliar[cont]){			
+							var aux=arrayAuxiliar[i];				
+							arrayAuxiliar[i]=arrayAuxiliar[cont];
+							arrayAuxiliar[cont]=aux;	
+						}
+					}
+				}
+				
+				mostrarVectorTabla(arrayAuxiliar,2);
+			}
+			
+			
+		</script>
+		
+	</head>
+	<body>
+		<h1>CADENA DE TEXTO EN ARRAY</h1>
+		<fieldset>
+			<legend>INFORMACION DE CADENA</legend>
+			
+			<table border="1px">
+				<tr>
+					<td>
+						La longitud es:
+					</td>
+					<td id="columna3">
+						<input type="text" id="textLongitud" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						Cadena oredenada ascendentemente
+					</td>
+					<td id="columna1"></td>
+				</tr>
+				<tr>
+					<td>
+						Cadena oredenada descendentemente
+					</td>
+					<td id="columna2"></td>
+				</tr>
+				
+			</table>
+			<input type="button" value="click" onclick="tomarCadena('cadenaToArray')" />
+		</fieldset>
+	</body>
+</html>
+

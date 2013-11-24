@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Ordenacion</title>
+		
+		<script language="JavaScript">
+		/*
+		 * 5º. Crear una Array con 15 valores numéricos:
+		 */
+		var arrayValoresNum = [3,2,1,4,5,6,11,8,9,10,7,12,15,14,13];
+		var arrayColores = ["#CEF6F5","#81F7BE","#FAAC58"];
+		function tablaNoOrdenada(){
+			var contador = 0;
+			var tabla = document.createElement("table");
+			//Datos de la tabla
+			for(var i = 0;i<3;i++){
+				var fila = document.createElement("tr");
+				for(var cont = 0;cont<5;cont++){
+					
+					var columna = document.createElement("td");
+					var contenido = document.createTextNode(arrayValoresNum[contador]);
+					columna.appendChild(contenido);
+					fila.appendChild(columna);
+					contador++;
+				}
+				fila.setAttribute("bgcolor",arrayColores[i]);
+				tabla.appendChild(fila);
+			}
+			tabla.setAttribute("border","2");
+			document.body.appendChild(tabla);
+		}
+		
+		//Ordenar el vector por el método de la burbuja
+		function burbuja(){
+			var aux =0;//Variable auxiliar para no perder la informacion de la casilla a escribir
+			var arrayAuxiliar = new Array();
+			
+			for(var i in arrayValoresNum){//Copia del array para no perder el original
+				arrayAuxiliar[i]=arrayValoresNum[i];
+			}
+			
+			for(var i=0;i<arrayAuxiliar.length;i++){
+				for(var cont=i;cont<arrayAuxiliar.length;cont++){			
+					if(arrayAuxiliar[i]>arrayAuxiliar[cont]){			
+						var aux=arrayAuxiliar[i];				
+						arrayAuxiliar[i]=arrayAuxiliar[cont];
+						arrayAuxiliar[cont]=aux;	
+					}
+				}
+			}
+			tablaNoOrdenada();
+			mostrarVectorTabla(arrayAuxiliar);
+			
+		}
+		
+		/*
+		 * Mostrar los elementos del vector ordenados mediante una tabla de 1 Fila por 15 columnas
+		 */
+		function mostrarVectorTabla(vector){
+			
+			var tabla = document.createElement("table");
+			var fila = document.createElement("tr");
+			
+			//Cabeceras de la tabla
+			for(var i = 0;i<vector.length;i++){
+				var columna = document.createElement("td");
+				var contenido = document.createTextNode(vector[i]);
+				columna.appendChild(contenido);
+				fila.appendChild(columna);
+				tabla.appendChild(fila);
+			}
+			tabla.setAttribute("border","2");
+			tabla.setAttribute("cellspacing","2");
+			tabla.setAttribute("cellpading","2");
+			document.body.appendChild(tabla);
+		}
+		
+		</script>
+	</head>
+	<body onload="burbuja();">
+		<h1>Ordenacion metodo burbuja</h1>
+		
+	</body>
+</html>
+

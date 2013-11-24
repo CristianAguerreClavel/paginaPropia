@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Practica 2</title>
+		
+		<script language="JavaScript">
+			/*
+			 * 1º Cadena mayuscula/minusculas o ambas
+			 */
+			function composicionCadena(cadena){
+				var cadenaMayus = cadena.toUpperCase();
+				var cadenaMinus = cadena.toLowerCase();
+				
+				if (cadena == cadenaMayus){
+					alert("La cadena: \""+cadena+"\" esta formada por caracteres en mayusculas");
+				}
+				else if (cadena == cadenaMinus){
+					alert("La cadena: \""+cadena+"\" esta formada por caracteres en minuscula");
+				}
+				else{
+					alert("La cadena: \""+cadena+"\" esta formada por caracteres en mayusculas y minuscula");
+				}
+			}
+			
+			function continuarEjecucion(funcion){
+				//Comprobacion si se desea continuar ejecutando
+				var r=confirm("Desea calcular denuevo:");
+				if (r==true){
+				  eval(funcion);//de esta forma podemos volver a llamar a la funcion cuyo nombre a sido pasado como parametro string
+				}
+				else{
+				  return;
+			  	}
+			}
+			
+			function tomarCadena(funcionEjecutar){
+				var cadena = prompt("Introduce una cadena");
+				eval(funcionEjecutar+'(cadena);');//De esta forma puedo llamar a cualquier funcion pasa como parametro y ademas pasarle como parametro la variable cadena
+			}
+			
+			/*
+			 * 2º Leer una cadena de texto mediante el método prompt() y generar un array con las palabras
+			 * que contiene. Posteriormente, mostrar la siguiente información. Desarrollar el Script, haciendo
+			 * uso de funciones (documentar y añadir los comentarios que consideréis necesario)
+			 */
+			function cadenaToArray(cadena){
+				var arrayPalabras = cadena.split(" ");
+				
+				mostrarArray(arrayPalabras);
+				numeroPalabras(arrayPalabras);
+				primeraYUltimaPalabra(arrayPalabras);
+				var arrayReverse = palabrasReverse(arrayPalabras);
+				mostrarArray(arrayReverse);
+			}
+			
+			function mostrarArray(arrayPalabras){
+				for (var i in arrayPalabras){
+					alert(arrayPalabras[i]+" ->  posicion: ["+i+"]");
+				}
+			}
+			
+			function numeroPalabras(arrayPalabras){
+				var cont = 0;
+				for (var i in arrayPalabras){
+					cont ++;
+				}
+				alert("La cadena esta formada por "+cont+" palabras");
+			}
+			
+			function primeraYUltimaPalabra(arrayPalabras){
+				var primera = arrayPalabras[0];
+				var ultima = arrayPalabras[arrayPalabras.length-1];
+				alert("La primera palabra es: "+primera);
+				alert("La ultima palabra es: "+ultima);
+			}
+			
+			function palabrasReverse(arrayPalabras){
+				var arrayReverse = new Array();
+				
+				var cont = arrayPalabras.length-1;
+				
+				for (var i = 0; i < arrayPalabras.length; i++){
+					arrayReverse[i] = arrayPalabras[cont];
+					cont--;
+				}
+				
+				return arrayReverse;
+			}
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		<h1>PRACTICA 2</h1><hr />
+		<fieldset>
+        	<legend>ARARTADO A</legend>
+        	<table>
+        		<tr>
+        			<td width="550px">Introducir una cadena y mostrar si esta en mayusculas, minusculas o compuesta </td>
+        			<td><input type="button" value="Ejecutar" onclick="tomarCadena('composicionCadena')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Convertir una cadena en un array </td>
+        			<td><input type="button" value="Ejecutar" onclick="tomarCadena('cadenaToArray')" /></td>
+        		</tr>
+
+        		
+        	</table>
+        </fieldset>
+		
+	</body>
+</html>
+
