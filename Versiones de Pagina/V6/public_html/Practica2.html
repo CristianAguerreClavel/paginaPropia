@@ -41,54 +41,6 @@
 				eval(funcionEjecutar+'(cadena);');//De esta forma puedo llamar a cualquier funcion pasa como parametro y ademas pasarle como parametro la variable cadena
 			}
 			
-			/*
-			 * 2º Leer una cadena de texto mediante el método prompt() y generar un array con las palabras
-			 * que contiene. Posteriormente, mostrar la siguiente información. Desarrollar el Script, haciendo
-			 * uso de funciones (documentar y añadir los comentarios que consideréis necesario)
-			 */
-			function cadenaToArray(cadena){
-				var arrayPalabras = cadena.split(" ");
-				
-				mostrarArray(arrayPalabras);
-				numeroPalabras(arrayPalabras);
-				primeraYUltimaPalabra(arrayPalabras);
-				var arrayReverse = palabrasReverse(arrayPalabras);
-				mostrarArray(arrayReverse);
-			}
-			
-			function mostrarArray(arrayPalabras){
-				for (var i in arrayPalabras){
-					alert(arrayPalabras[i]+" ->  posicion: ["+i+"]");
-				}
-			}
-			
-			function numeroPalabras(arrayPalabras){
-				var cont = 0;
-				for (var i in arrayPalabras){
-					cont ++;
-				}
-				alert("La cadena esta formada por "+cont+" palabras");
-			}
-			
-			function primeraYUltimaPalabra(arrayPalabras){
-				var primera = arrayPalabras[0];
-				var ultima = arrayPalabras[arrayPalabras.length-1];
-				alert("La primera palabra es: "+primera);
-				alert("La ultima palabra es: "+ultima);
-			}
-			
-			function palabrasReverse(arrayPalabras){
-				var arrayReverse = new Array();
-				
-				var cont = arrayPalabras.length-1;
-				
-				for (var i = 0; i < arrayPalabras.length; i++){
-					arrayReverse[i] = arrayPalabras[cont];
-					cont--;
-				}
-				
-				return arrayReverse;
-			}
 			
 		</script>
 		
@@ -105,7 +57,11 @@
         		</tr>
         		<tr>
         			<td width="550px">Convertir una cadena en un array </td>
-        			<td><input type="button" value="Ejecutar" onclick="tomarCadena('cadenaToArray')" /></td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('ejerArrayDesglosado.html')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="550px">Desglose de una cadena </td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('ejerArrayDeglosado.html')" /></td>
         		</tr>
 
         		

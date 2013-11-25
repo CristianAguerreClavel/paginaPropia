@@ -7,7 +7,13 @@
 		<title>Informacion de cadena</title>
 		
 		<script language="JavaScript">
+		
+		//TODO ROBUSTEZ 
+		//FALLO 1 SE DEVE BORRAR LOS DATOS ANTERIORES AL INTRODUCIR LA NUEVA CADENA
 			
+			/*
+			 * Funcion que permite tomar la cadena para cualquier funcion
+			 */
 			function tomarCadena(funcionEjecutar){
 				var cadena = prompt("Introduce una cadena");
 				eval(funcionEjecutar+'(cadena);');//De esta forma puedo llamar a cualquier funcion pasa como parametro y ademas pasarle como parametro la variable cadena
@@ -21,7 +27,8 @@
 			function cadenaToArray(cadena){
 				var arrayPalabras = cadena.split(" ");
 				
-				mostrarArray(arrayPalabras);
+				var arrayConPos = mostrarArrayConPos(arrayPalabras);
+				mostrarVectorTabla(arrayConPos,7);//TODO El numero de las columnas esta desordenado
 				numeroPalabras(arrayPalabras);
 				primeraYUltimaPalabra(arrayPalabras);
 				var arrayReverse = palabrasReverse(arrayPalabras);
@@ -33,6 +40,13 @@
 				for (var i in arrayPalabras){
 					alert(arrayPalabras[i]+" ->  posicion: ["+i+"]");
 				}
+			}
+			function mostrarArrayConPos(arrayPalabras){
+				var arrayPos = new Array();
+				for (var i in arrayPalabras){
+					arrayPos[i] = arrayPalabras[i]+" ->  posicion: ["+i+"]";
+				}
+				return arrayPos;
 			}
 			
 			function numeroPalabras(arrayPalabras){
@@ -48,8 +62,12 @@
 			function primeraYUltimaPalabra(arrayPalabras){
 				var primera = arrayPalabras[0];
 				var ultima = arrayPalabras[arrayPalabras.length-1];
-				alert("La primera palabra es: "+primera);
-				alert("La ultima palabra es: "+ultima);
+				var tPrimera = document.getElementById("textPrimera");
+				var tUltima = document.getElementById("textUltima");
+				tPrimera.value = primera;
+				tUltima.value = ultima;
+				//alert("La primera palabra es: "+primera);
+				//alert("La ultima palabra es: "+ultima);
 			}
 			
 			function palabrasReverse(arrayPalabras){
@@ -62,7 +80,7 @@
 					cont--;
 				}
 				
-				return arrayReverse;
+				mostrarVectorTabla(arrayReverse,6);
 			}
 			
 			var contTabla = 0;
@@ -135,31 +153,60 @@
 		<fieldset>
 			<legend>INFORMACION DE CADENA</legend>
 			
-			<table border="1px">
+			<table border="0px">
+				<tr>
+					<td>
+						<input type="button" value="Introducir una cadena" onclick="tomarCadena('cadenaToArray')" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						La cadena introducida convertida en array:
+					</td>
+					<td id="columna7"></td>
+				</tr>
 				<tr>
 					<td>
 						La longitud es:
 					</td>
 					<td id="columna3">
-						<input type="text" id="textLongitud" />
+						<input type="text" id="textLongitud" disabled="disabled" />
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						Cadena oredenada ascendentemente
+						Cadena oredenada de la A a la Z: 
 					</td>
 					<td id="columna1"></td>
 				</tr>
 				<tr>
 					<td>
-						Cadena oredenada descendentemente
+						Cadena oredenada de la Z a la A:
 					</td>
 					<td id="columna2"></td>
 				</tr>
+				<tr>
+					<td>
+						La primera palabra es: 
+					</td>
+					<td id="columna4"><input type="text" id="textPrimera" disabled="disabled"/></td>
+				</tr>
+				<tr>
+					<td>
+						La ultima palabra es: 
+					</td>
+					<td id="columna5"><input type="text" id="textUltima" disabled="disabled"/></td>
+				</tr>
+				<tr>
+					<td>
+						La cadena del reves es: 
+					</td>
+					<td id="columna6"></td>
+				</tr>
 				
 			</table>
-			<input type="button" value="click" onclick="tomarCadena('cadenaToArray')" />
+			
 		</fieldset>
 	</body>
 </html>

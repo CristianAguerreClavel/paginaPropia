@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Desglosado en letras</title>
+		
+		<script language="JavaScript">
+			//TODO letras toLoweCase, borrado al volver a ejecutar, robustez
+			
+			
+			var arrayLetras = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+							  'n','ñ','o','p','q','r','s','t','u','v','w','y','x','z'];
+			var arrayCont = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			/*
+			 * Funcion que permite tomar la cadena para cualquier funcion
+			 */
+			function tomarCadena(funcionEjecutar){
+				var cadena = prompt("Introduce una cadena");
+				setCadenaOriginal(cadena);
+				eval(funcionEjecutar+'(cadena);');//De esta forma puedo llamar a cualquier funcion pasa como parametro y ademas pasarle como parametro la variable cadena
+			}
+			
+		    function mostrarArray(arrayPalabras){
+				for (var i in arrayPalabras){
+					alert(arrayPalabras[i]+" ->  posicion: ["+i+"]");
+				}
+			}
+			
+			function setCadenaOriginal(cadena){
+				var columna1 = document.getElementById("columna1").innerHTML = cadena;
+			}
+			
+			function numLetras(cadena){
+				var arrayCaracteres = new Array();
+				arrayCaracteres = cadena.split('');//Conversion de la cadena en un array de caracteres
+				for (var i = 0; i< arrayCaracteres.length;i++){
+					for (var j in arrayLetras){
+						if(arrayCaracteres[i] == arrayLetras[j]){
+						 	arrayCont[j]=1+arrayCont[j];
+						}
+					}
+				}
+				
+				mostrarVectorTablaVerDoble(arrayCont,2);
+			}
+			
+			function mostrarVectorTablaVerDoble(vector,id){//Este metodo es una modificacion del normal con la peculiaridad que dibuja encima de la fila dinamica las letras de forma dinamica
+				var tabla = document.createElement("table");
+				var fila = document.createElement("tr");
+				var fila2 = document.createElement("tr");
+				//Cabeceras de la tabla
+				for(var i = 0;i<vector.length;i++){
+					var columna = document.createElement("td");
+					var contenido = document.createTextNode(vector[i]);
+					
+					var columna2 = document.createElement("td");//Fila de las Letras
+					var contenido2 = document.createTextNode(arrayLetras[i]);
+					
+					columna.appendChild(contenido);
+					fila.appendChild(columna);
+					
+					columna2.appendChild(contenido2);
+					fila2.appendChild(columna2);
+					
+					tabla.appendChild(fila2);
+					tabla.appendChild(fila);
+				}
+				var columna1 = document.getElementById("columna"+id);
+				tabla.setAttribute("border","2");
+				tabla.setAttribute("cellspacing","2");
+				tabla.setAttribute("cellpading","2");
+				columna1.appendChild(tabla);
+			}
+			
+			function mostrarVectorTabla(vector, id){//Dibuja la tabla en la columna de la tabla principal que se le pasa como ID
+				var tabla = document.createElement("table");
+				var fila = document.createElement("tr");
+				
+				//Cabeceras de la tabla
+				for(var i = 0;i<vector.length;i++){
+					var columna = document.createElement("td");
+					var contenido = document.createTextNode(vector[i]);
+					columna.appendChild(contenido);
+					fila.appendChild(columna);
+					tabla.appendChild(fila);
+				}
+				var columna1 = document.getElementById("columna"+id);
+				tabla.setAttribute("border","2");
+				tabla.setAttribute("cellspacing","2");
+				tabla.setAttribute("cellpading","2");
+				columna1.appendChild(tabla);
+			}
+			
+		</script>
+		
+		
+	</head>
+	
+	
+	<body>
+		<h1>COMPOSICION DEL ARRAY</h1>
+		<fieldset>
+			<legend>DESGLOSADO DEL ARRAY</legend>
+			<table border="0px">
+				<tr>
+					<td>
+						<input type="button" value="Probar" onclick="tomarCadena('numLetras')"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Cadena original: 
+					</td>
+					<td id="columna1"></td>
+				</tr>
+				
+				<tr>
+					<td>Veces que aparece cada letra: </td>
+					<td id="columna2"></td>
+				</tr>
+			</table>
+		</fieldset>
+		
+	</body>
+</html>
+

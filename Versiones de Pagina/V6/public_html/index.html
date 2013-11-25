@@ -8,17 +8,193 @@
     	<!-- Start css3menu.com HEAD section -->
 	    <link rel="stylesheet" href="index_files/css3menu0/style.css" type="text/css" /><style type="text/css">._css3m{display:none}</style>
 	<!-- End css3menu.com HEAD section -->
-</head>
-    <body background="Img/3.jpg">
+	
+		<!--ESTILO PARA EL RELOJ-->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+    <style type="text/css">
+        html {
+            font-family: 'Ubuntu', Arial, sans-serif;
+        }
+        
+        div.clock {
+            width: 100%;
+            text-align: center;
+        }
 
-	<table border="0" width="100%">
+            div.clock a {
+                color: #333;
+                font-size: 18px;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+                div.clock a:hover {
+                    text-decoration: underline;
+                }
+
+            div.clock div.date {
+                color: #DF0101;/*Color de la fecha superior*/
+                font-size: 1.5em;
+                margin: 8px 0;
+            }
+
+            div.clock div.time {
+                font-size: 3em;
+                font-weight: 200;
+            }
+
+                div.clock div.time span {
+                    border-radius: 5px;
+                    padding: 1px 4px 3px 4px;
+                    color: #fff;/*Color de los numeros del reloj
+
+					/*----------------------------------------------------------*/
+					/*---------------------COLOR DEL FONDO----------------------*/
+					/*----------------------------------------------------------*/
+                    /* fallback */
+                    background: #000;
+                    /* Safari 4-5, Chrome 1-9 */
+                    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DF0101), to(#DF0101));
+                    /* Safari 5.1, Chrome 10+ */
+                    background: -webkit-linear-gradient(top, red, red);
+                    /* Firefox 3.6+ */
+                    background: -moz-linear-gradient(top, #DF0101,#A40909);
+                    /* IE 10 */
+                    background: -ms-linear-gradient(top,#DF0101 black);
+                    /* Opera 11.10+ */
+                    background: -o-linear-gradient(top, red, red);
+                    /*----------------------------------------------------------*/
+					/*--------------------FIN COLOR DEL FONDO-------------------*/
+					/*----------------------------------------------------------*/
+                }
+
+                div.clock div.time strong {
+                    font-weight: 100;
+                    font-size: 1em;
+                    margin-left: 5px;
+                    color: #666;
+                }
+    </style>
+    
+</head>
+    <body bgcolor="white">
+	 <script type="text/javascript">
+	
+	        $(document).ready(function() {
+	            $("div#clock").simpleClock(1);
+	        });
+	        
+	        //***** SIMPLECLOCK PLUGIN http://ticktoo.com/blog/35-simpleClock+-+jQuery+Plugin *****/
+	        (function ($) {
+	
+	          $.fn.simpleClock = function ( utc_offset ) {
+	
+	            // Aktuelle Sprache ermitteln
+	            var language = "es";
+	
+	            // Tage & Monate in jeweiliger Landessprache
+	            switch (language) {
+	                case "de":
+	                    var weekdays = ["So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."];
+	                    var months = ["Jan.", "Feb.", "Mär.", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."];
+	                    break;
+	                case "es":
+	                    var weekdays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+	                    var months = ["Ene", "Feb", "Mar", "Abr", "Mayo", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
+	                    break;
+	                case "fr":
+	                    var weekdays = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+	                    var months = ["Jan", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"];
+	                    break;
+	                default:    // "en" -> Standard: Englisch
+	                    var weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	                    var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+	                    break;
+	            }
+	
+	            clock = this;
+	
+	            // getTime - Where the magic happens ...
+	            function getTime() {
+	              var date = new Date();
+	
+	              var nowUTC = date.getTime() + date.getTimezoneOffset()*60*1000;
+	
+	              // alert( nowUTC +' vs. '+ date.getTime() );
+	
+	              // Zeitverschiebung addieren/subtrahieren: X STD * 60 Min. * 60 Sek. * 1000 Millisek.
+	              date.setTime( nowUTC + (utc_offset*60*60*1000) );
+	
+	              var hour = date.getHours();
+	
+	                ///// AM, PM für Language "en"
+	                if ( language == "en" ) {
+	                    //it is pm if hours from 12 onwards
+	                    suffix = (hour >= 12)? 'p.m.' : 'a.m.';
+	
+	                    //only -12 from hours if it is greater than 12 (if not back at mid night)
+	                    hour = (hour > 12)? hour -12 : hour;
+	
+	                    //if 00 then it is 12 am
+	                    hour = (hour == '00')? 12 : hour;
+	                }
+	
+	              return {
+	                day: weekdays[date.getDay()],
+	                date: date.getDate(),
+	                month: months[date.getMonth()],
+	                year: date.getFullYear(),
+	                hour: appendZero(hour),
+	                minute: appendZero(date.getMinutes()),
+	                second: appendZero(date.getSeconds())
+	              };
+	            }
+	
+	            // appendZero - If the number is less than 10, add a leading zero. 
+	            function appendZero(num) {
+	              if (num < 10) {
+	                return "0" + num;
+	              }
+	              return num;
+	            }
+	
+	            // refreshTime - Build the clock.
+	            function refreshTime(clock_id) {
+	                var now = getTime();
+	                clock = $.find('#'+clock_id);
+	                $(clock).find('.date').html(now.day + ', ' + now.date + '. ' + now.month + ' ' + now.year);
+	                $(clock).find('.time').html("<span class='hour'>" + now.hour + "</span>:<span class='minute'>" + now.minute + "</span>:<span class='second'>" + now.second + "</span>");
+	
+	                if ( typeof(suffix) != "undefined") { // am oder pm ?
+	                    $(clock).find('.time').append('<strong>'+ suffix +'</strong>');
+	                }
+	            }
+	
+	            // Get individual clock_id
+	            var clock_id = $(this).attr('id');
+	
+	            // Tick tock - Run the clock.
+	            refreshTime(clock_id);
+	            setInterval( function() { refreshTime(clock_id) }, 1000);    
+	
+	          };
+	        })(jQuery);
+	    //--></script>
+	<table border="0px" width="100%">
 		
 		<tr height="15%" width="100%">
 			
 			
-			<td valign="bottom" colspan="2" >
+			<td valign="bottom" >
 				<img src="Img/CABE2.png" />
 			</td>
+			<td>
+				<div class="clock" id="clock">
+			        <div class="date"></div>
+			        <div class="time"></div>
+    			</div>
+    		</td>
 		</tr>
 		
 		<tr>
