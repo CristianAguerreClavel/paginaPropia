@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Practica 2 - B</title>
+		
+		<script language="JavaScript">
+		
+			/*---------------------------------------------------------*/
+			/*------------FUNCIONES DE COMPROBACION--------------------*/
+			/*---------------------------------------------------------*/
+			//Comprobaciones - Robustez
+		    	function esNumero(num){//funcion que si se le pasa un valor no numerico devuelve false
+		    		if (isNaN(num)){
+		    			return false;
+		    		}else{
+		    			return true;
+		    		}
+		    	}
+		    	
+		    	function esVacio(elemento){//Si esta vacio devuelve true
+		    		if(elemento == ""|| elemento== null || /^\s+$/.test(elemento)){
+		    			return true;
+		    		}else{
+		    			return false;
+		    		}
+		    	}
+		    	
+		    	function estaFueraDeRango(elemento){
+		    		if(elemento<0 || elemento > 10){
+		    			return true;
+		    		}else{
+		    			return false;
+		    		}
+		    	}
+			/*---------------------------------------------------------*/
+			/*------------FUNCIONES DE COMPROBACION--------------------*/
+			/*---------------------------------------------------------*/
+			
+			/*Confeccionar un programa que solicita un valor comprendido entre 1 y 10. Luego
+			generar un valor aleatorio entre 1 y 10, mostrar un mensaje con el número sorteado e
+			indicar si ganó o perdió:*/
+			
+			function controlDeEjecucion(){
+				var numUsuario = tomarDatos();
+				if(comprobarNumero(numUsuario)){
+					return;
+				}
+				var numAleatorio = generarNumAleatorio();
+				comprobarAcierto(numUsuario, numAleatorio);
+			}
+			function tomarDatos(){
+				var numero = prompt("Introduce un numero comprendido entre 0 y 10");
+				return numero;
+			}
+			function comprobarNumero(numUsuario){
+				if(esVacio(numUsuario)){
+					alert("No ha introducido ningun valor");
+					return true;
+				}
+				if(!esNumero(numUsuario)){
+					alert("Solo se permiten valores numericos");
+					return true;
+				}
+				if(estaFueraDeRango(numUsuario)){
+					alert("El numero introducido esta fuera del rango permitido");
+					return true;
+				}
+			}
+			function generarNumAleatorio(){
+				var aleatorio = Math.floor(Math.random()*11);
+				return aleatorio;
+			}
+			function comprobarAcierto(numUsuario, numAleatorio){
+				if (numUsuario == numAleatorio){
+					alert("Has acertado!!");
+				}else{
+					alert("El numero aleatorio era "+numAleatorio+"\nMas suerte la proxima vez");
+				}
+			}
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		<h1>PRACTICA 2</h1><hr />
+		<fieldset>
+        	<legend>ARARTADO B</legend>
+        	<table>
+        		<tr>
+        			<td width="350px">Mostrar imagenes aleatoriamente</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('Present.html')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Adivinar numero Aleatorio</td>
+        			<td><input type="button" value="Ejecutar" onclick="controlDeEjecucion()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Degradado de pagina</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('degradado.html')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Tabla de colores</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('tablaDeColores.html')" /></td>
+        		</tr>
+        		
+			</table>
+        </fieldset>
+		
+	</body>
+</html>

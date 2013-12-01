@@ -12,14 +12,15 @@
     	<script language="JavaScript">
         	
         	function cambiarImg(){
-        		var aleatorio = Math.floor(Math.random()*4);
+        		var aleatorio = Math.floor(Math.random()*6);
         		
 				var srcs = new Array();
 				srcs[0] = "Img/1.png";
 				srcs[1] = "Img/2.jpg";
-				srcs[2] = "Img/3.jpg";
+				srcs[2] = "Img/3.png";
 				srcs[3] = "Img/4.jpg";
-				srcs[4] = "Img/5.jpg";
+				srcs[4] = "Img/5.png";
+				srcs[5] = "Img/6.png";
 
         		var img = document.getElementById("im1");
         		img.src = srcs[aleatorio];
@@ -28,8 +29,10 @@
         	}
         	
         	window.onload = function() {
-  				setInterval(cambiarImg, 5000);
+  				setInterval(cambiarImg, 5000);//Cambia imagen cada 5 segundos
 			}
+        	
+        	
         	
         </script>
     	
@@ -38,7 +41,7 @@
 		        	Mi nombre es Cristian Aguerre Clavel, tengo 23 a&ntilde;os, actualmente estudio Desarrollo de aplicaciones multiplataforma.
 		        </p>
 		        <div id="div1">
-		        	<img id="im1" src="Img/the_red_line_by_lozha-d2yiyvg.png" />
+		        	<img id="im1" src="./Img/2.jpg" />
 		        </div>
         </table>
     </body>

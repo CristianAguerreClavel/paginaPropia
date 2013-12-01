@@ -7,13 +7,55 @@
 		<title>Practica 2</title>
 		
 		<script language="JavaScript">
+		
+			//FUNCIONES DE COMPROBACION DE DATOS
+	    	//Comprobaciones - Robustez
+	    	function esNumero(num){//funcion que si se le pasa un valor no numerico devuelve false
+	    		if (isNaN(num)){
+	    			return false;
+	    		}else{
+	    			return true;
+	    		}
+	    	}
+	    	
+	    	function esVacio(elemento){//Si esta vacio devuelve true
+	    		if(elemento == ""|| elemento== null){
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	function esNegativo(elemento){
+	    		if(elemento<0){
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	/*function numeroDni(numeroDni){
+	    		if(numeroDni>99999999){
+	    			
+	    		}
+	    	}*/
+	    	//FIN DE FUNCIONES DE COMPROBACION DE DATOS
 			/*
 			 * 1º Cadena mayuscula/minusculas o ambas
 			 */
 			function composicionCadena(cadena){
 				var cadenaMayus = cadena.toUpperCase();
 				var cadenaMinus = cadena.toLowerCase();
-				
+				/*---------------COMPROBACIONES--------------------*/
+				if(esVacio(cadenaMayus)){
+					alert("No ha introducido ningun valor");
+					return;
+				}
+				if(esNumero(cadenaMayus)){
+					alert("No esta permitido utilizar unicamente valores numericos");
+					return;
+				}
+				/*---------------FIN COMPROBACIONES--------------------*/
 				if (cadena == cadenaMayus){
 					alert("La cadena: \""+cadena+"\" esta formada por caracteres en mayusculas");
 				}
@@ -52,16 +94,24 @@
         	<legend>ARARTADO A</legend>
         	<table>
         		<tr>
-        			<td width="550px">Introducir una cadena y mostrar si esta en mayusculas, minusculas o compuesta </td>
+        			<td width="350px">Introducir una cadena y mostrar si esta en mayusculas, minusculas o compuesta </td>
         			<td><input type="button" value="Ejecutar" onclick="tomarCadena('composicionCadena')" /></td>
         		</tr>
         		<tr>
-        			<td width="550px">Convertir una cadena en un array </td>
+        			<td width="350px">Convertir una cadena en un array </td>
         			<td><input type="button" value="Ejecutar" onclick="window.open('ejerArrayDesglosado.html')" /></td>
         		</tr>
         		<tr>
-        			<td width="550px">Desglose de una cadena </td>
-        			<td><input type="button" value="Ejecutar" onclick="window.open('ejerArrayDeglosado.html')" /></td>
+        			<td width="350px">Desglose de una cadena </td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('ejer3DesglosadoEnLetras.html')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Modificacion del codigo de reloj</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('rejolYFecha.html')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Implementa un reloj en tu pagina principal</td>
+        			<td><input type="button" value="Ir al Index" onclick="window.open('index.html')" /></td>
         		</tr>
 
         		

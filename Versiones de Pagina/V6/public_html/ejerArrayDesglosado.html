@@ -8,14 +8,54 @@
 		
 		<script language="JavaScript">
 		
-		//TODO ROBUSTEZ 
+		//FUNCIONES DE COMPROBACION DE DATOS
+	    	//Comprobaciones - Robustez
+	    	
+	    	function esNumero(num){//funcion que si se le pasa un valor no numerico devuelve false
+	    		if (isNaN(num)){
+	    			return false;
+	    		}else{
+	    			return true;
+	    		}
+	    	}
+	    	
+	    	function esVacio(elemento){//Si esta vacio devuelve true
+	    		if(elemento == ""|| elemento== null){
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	function esNegativo(elemento){
+	    		if(elemento<0){
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	/*function numeroDni(numeroDni){
+	    		if(numeroDni>99999999){
+	    			
+	    		}
+	    	}*/
+    	//FIN DE FUNCIONES DE COMPROBACION DE DATOS		
+
 		//FALLO 1 SE DEVE BORRAR LOS DATOS ANTERIORES AL INTRODUCIR LA NUEVA CADENA
 			
 			/*
 			 * Funcion que permite tomar la cadena para cualquier funcion
 			 */
 			function tomarCadena(funcionEjecutar){
+				borrarDatos()
 				var cadena = prompt("Introduce una cadena");
+				
+				if(esVacio(cadena)){
+					alert("No ha introducido ningun valor");
+					return;
+				}
+				
 				eval(funcionEjecutar+'(cadena);');//De esta forma puedo llamar a cualquier funcion pasa como parametro y ademas pasarle como parametro la variable cadena
 			}
 			
@@ -24,11 +64,11 @@
 			 * que contiene. Posteriormente, mostrar la siguiente información. Desarrollar el Script, haciendo
 			 * uso de funciones (documentar y añadir los comentarios que consideréis necesario)
 			 */
-			function cadenaToArray(cadena){
+			function cadenaToArray(cadena){//Actua de control de ejecucion
 				var arrayPalabras = cadena.split(" ");
 				
 				var arrayConPos = mostrarArrayConPos(arrayPalabras);
-				mostrarVectorTabla(arrayConPos,7);//TODO El numero de las columnas esta desordenado
+				mostrarVectorTabla(arrayConPos,7);
 				numeroPalabras(arrayPalabras);
 				primeraYUltimaPalabra(arrayPalabras);
 				var arrayReverse = palabrasReverse(arrayPalabras);
@@ -79,7 +119,6 @@
 					arrayReverse[i] = arrayPalabras[cont];
 					cont--;
 				}
-				
 				mostrarVectorTabla(arrayReverse,6);
 			}
 			
@@ -97,7 +136,8 @@
 					tabla.appendChild(fila);
 				}
 				var columna1 = document.getElementById("columna"+id);
-				tabla.setAttribute("border","2");
+				tabla.setAttribute("id","1");
+				tabla.setAttribute("border","1");
 				tabla.setAttribute("cellspacing","2");
 				tabla.setAttribute("cellpading","2");
 				columna1.appendChild(tabla);
@@ -143,17 +183,31 @@
 				
 				mostrarVectorTabla(arrayAuxiliar,2);
 			}
-			
-			
+			function borrarDatos(){
+				var input1 = document.getElementById("textLongitud");
+				var input2 = document.getElementById("textPrimera");
+				var input3 = document.getElementById("textUltima");
+				
+				input1.value = "";
+				input2.value = "";
+				input3.value = "";
+				borrarTabla();
+			}
+			function borrarTabla(){//BORRADO DE TABLAS hace trampa, ya que elimina en cascada los elementos
+				for (var i = 0; i<4;i++){
+					var tabla = document.getElementById("1");
+					if(tabla) tabla.parentNode.removeChild(tabla);
+				}
+			}
 		</script>
 		
 	</head>
 	<body>
-		<h1>CADENA DE TEXTO EN ARRAY</h1>
+		<h1>CADENA DE TEXTO EN ARRAY</h1><hr />
 		<fieldset>
 			<legend>INFORMACION DE CADENA</legend>
 			
-			<table border="0px">
+			<table border="0px" id="">
 				<tr>
 					<td>
 						<input type="button" value="Introducir una cadena" onclick="tomarCadena('cadenaToArray')" />

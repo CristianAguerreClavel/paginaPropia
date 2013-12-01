@@ -30,6 +30,7 @@
 				tabla.appendChild(fila);
 			}
 			tabla.setAttribute("border","2");
+			tabla.setAttribute("align","center");
 			document.body.appendChild(tabla);
 		}
 		
@@ -60,7 +61,6 @@
 		 * Mostrar los elementos del vector ordenados mediante una tabla de 1 Fila por 15 columnas
 		 */
 		function mostrarVectorTabla(vector){
-			
 			var tabla = document.createElement("table");
 			var fila = document.createElement("tr");
 			
@@ -71,17 +71,19 @@
 				columna.appendChild(contenido);
 				fila.appendChild(columna);
 				tabla.appendChild(fila);
+				//alert("final del bucle pero dentro");
 			}
 			tabla.setAttribute("border","2");
 			tabla.setAttribute("cellspacing","2");
 			tabla.setAttribute("cellpading","2");
+			tabla.setAttribute("align","center");
 			document.body.appendChild(tabla);
 		}
 		
 		</script>
 	</head>
 	<body onload="burbuja();">
-		<h1>Ordenacion metodo burbuja</h1>
+		<h1>Ordenacion metodo burbuja</h1><hr />
 		
 	</body>
 </html>

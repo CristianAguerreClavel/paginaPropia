@@ -1,0 +1,42 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Construir tabla de colores con Javascript</title>
+	<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+</head>
+
+	<body>
+		<h1 align="center">Tabla de colores<br>Javascript</h1>
+		<table width="80%" align="center"> 
+		<script language="javascript">
+			var r = new Array("00","33","66","99","CC","FF");
+			var g = new Array("00","33","66","99","CC","FF");
+			var b = new Array("00","33","66","99","CC","FF");
+			for (i=0;i<r.length;i++) 
+				for (j=0;j<g.length;j++) {
+					document.write("<tr>");
+					for (k=0;k<b.length;k++) {
+						var nuevoc = "#" + r[i] + g[j] + b[k];
+						document.write("<td bgcolor=\"" + nuevoc + "\" align=center onclick=\"obtenerColor('"+nuevoc+"')\">");
+						document.write(nuevoc);
+					}
+					document.write("</tr>");
+				}
+				
+			function obtenerColor(nuevoc){
+				var window=open("","","width=350,height=400");
+				window.focus();
+				window.document.write("<html><head><title>Color seleccionado"+"Colores</TITLE></HEAD>\n");
+			    window.document.write("<body >\n El codigo del color seleccionado es: "+nuevoc);
+			    window.document.write("</body></html>\n");
+			    window.document.close();
+			    window.document.bgColor = nuevoc;
+			}
+		
+		</script>
+	</table>
+	
+	</body>
+</html>

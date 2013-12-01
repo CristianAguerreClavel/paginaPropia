@@ -4,10 +4,41 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="EstiloP1.css">
-        <title>Practica 1</title>
+        <title>Practica 1 - A </title>
         <script language="JavaScript">
     	
-    	//TODO Implementar robustez a todas las funciones
+    	//--------------------------------- FUNCIONES DE COMPROBACION DE DATOS
+    	//Comprobaciones - Robustez
+    	function esNumero(num){//funcion que si se le pasa un valor no numerico devuelve false
+    		if (isNaN(num)){
+    			return false;
+    		}else{
+    			return true;
+    		}
+    	}
+    	
+    	function esVacio(elemento){//Si esta vacio devuelve true
+    		if(elemento == ""|| elemento== null || /^\s+$/.test(elemento)){
+    			return true;
+    		}else{
+    			return false;
+    		}
+    	}
+    	
+    	function esNegativo(elemento){
+    		if(elemento<0){
+    			return true;
+    		}else{
+    			return false;
+    		}
+    	}
+    	//-------------------------- FIN DE FUNCIONES DE COMPROBACION DE DATOS
+    	//--------------------------------------------------------------------
+    	//--------------------------------------------------------------------
+    	
+    	
+    	/*-------------------------------FUNCIONES DE PRACTICA 1-A--------------------------*/
+    	
     	//1º A partir de los siguiente valores que se proporciona: true, 5, false, "hola", "adios", 2
     	/*
 		 *	a) Crear y asignar variables para cada valor
@@ -28,7 +59,6 @@
 			}else{
 				alert("La cadena "+string2+" es mayor que "+string1);
 			}
-		 	
 		}
 		
 		/*
@@ -36,15 +66,24 @@
 		 * operadores necesarios para obtener un resultado true y otro resultado false
 		 */
 		
-		
+		function booleanos(){
+			var boT = booleano1 || booleano2;
+			var boF = booleano1 && booleano2;
+			
+			alert("var boT = booleano1 || booleano2; = "+boT);
+			alert("var boF = booleano1 && booleano2; = "+boF);	
+		}
 		
 		/*
 		 * d) Determinar el resultado de las cinco operaciones matemáticas realizadas
 		 *  con los dos elementos numéricos
 		 */
+		function controlDeOpMatematicas(){
+			alert(" La suma es = "+suma()+"\n La resta es = "+resta()+"\n El producto es = "
+			+producto()+"\n La division es = "+division()+"\n El resto es = "+resto());
+		}
 		function suma(){
 			var result = num1+num2;
-			alert(result);
 			return result;
 		}
 		
@@ -74,12 +113,30 @@
 			var num2 = prompt("Introduce el 2º numero");
 			var num3 = prompt("Introduce el 3º numero");
 			
-			var numero = [];
+			/*------------------------------------------------------------*/
+			/*----------------BLOQUE COMPROBACION DATOS-------------------*/
+			/*------------------------------------------------------------*/
+			var bol1 = esNumero(num1);
+			var bol2 = esNumero(num2);
+			var bol3 = esNumero(num3);
+			//Comprobacion tipo de variables
+			if (!bol1 || !bol2 || !bol3){
+				alert("Uno o mas valores introducidos no son numericos");
+				return;
+			}
+			//Comprobacion si esta vacio alguno de los numeros
+			if(esVacio(num1)||esVacio(num2)||esVacio(num3)){
+				alert("Uno o mas numeros no tiene valor");
+				return;
+			}
+			/*------------------------------------------------------------*/
+			/*----------------------FIN COMPROBACIONES--------------------*/
+			/*------------------------------------------------------------*/			
 			
+			var numero = [];
 			
 			if (num1 < num2 && num1 < num3){
 				numero[0]=num1;
-			
 				if (num2 < num3){
 				 	numero[1]=num2;
 				 	numero[2]=num3;
@@ -92,7 +149,6 @@
 			
 			else if (num2 < num1 && num2 < num3){
 				numero[0]=num2;
-			
 				if (num1 < num3){
 				 	numero[1]=num1;
 				 	numero[2]=num3;
@@ -105,17 +161,15 @@
 			
 			else if (num3 < num2 && num3 < num1){
 				numero[0]=num3;
-				
-				if (num3 < num1){
-				 	numero[1]=num3;
-				 	numero[2]=num1;
+				if (num1 < num2){
+				 	numero[1]=num1;
+				 	numero[2]=num2;
 				 }
 				 else{
-				 	numero[1]=num1;
-				 	numero[2]=num3;
+				 	numero[1]=num2;
+				 	numero[2]=num1;
 				 }
 			}
-			
 			alert(numero[0]);
 			alert(numero[1]);
 			alert(numero[2]);
@@ -142,16 +196,37 @@
 			if(numeroAux<=numero2) {
 			  alert("Incrementar en 1 unidad el valor de numero1 no lo hace mayor o igual que numero2");
 			}
-
 		}
 		
 		/*Utilizando la estructura for, crear un script que calcule el factorial de un número entero que el
 		usuario introducirá por teclado. Validar la entrada de que sea un número entero, en el caso de
 		que no introduzca un valor numérico adecuado, mostraremos una caja de aviso mediante alert y
 		volveremos a solicitarle un número válido*/
-		
 		function factorial(){
 			var numero = prompt("Introduce un numero para calcular su factorial: ");
+			
+			/*------------------------------------------------------------*/
+			/*----------------BLOQUE COMPROBACION DATOS-------------------*/
+			/*------------------------------------------------------------*/
+			//Comprobacion tipo de variables
+			if (!esNumero(numero)){
+				alert("El valor introducido no es un numero");
+				return;
+			}
+			//Comprobacion si esta vacio alguno de los numeros
+			if(esVacio(numero)){
+				alert("No ha introducido ningun valor");
+				return;
+			}
+			//Comprobacion si es un numero negativo
+			if(esNegativo(numero)){
+				alert("El valor introducido es negativo");
+				return;
+			}
+			/*------------------------------------------------------------*/
+			/*----------------------FIN COMPROBACIONES--------------------*/
+			/*------------------------------------------------------------*/		
+			
 			var numeroAux = numero;
 			var result = 1;
 			for (var i=numero;i>1; i--)
@@ -160,12 +235,34 @@
 				numeroAux--;
 			}
 			alert("El factorial de "+numero+" es "+result);
-			
 			continuarEjecucion("factorial();");
 		}
 		
 		function fibonaci(){
 			var numero = prompt("Introduce el numero para la funcion de fibonaci: ");
+			
+			/*------------------------------------------------------------*/
+			/*----------------BLOQUE COMPROBACION DATOS-------------------*/
+			/*------------------------------------------------------------*/
+			//Comprobacion tipo de variables
+			if (!esNumero(numero)){
+				alert("El valor introducido no es un numero");
+				return;
+			}
+			//Comprobacion si esta vacio alguno de los numeros
+			if(esVacio(numero)){
+				alert("No ha introducido ningun valor");
+				return;
+			}
+			//Comprobacion si es un numero negativo
+			if(esNegativo(numero)){
+				alert("El valor introducido es negativo");
+				return;
+			}
+			/*------------------------------------------------------------*/
+			/*----------------------FIN COMPROBACIONES--------------------*/
+			/*------------------------------------------------------------*/
+			
 			var numeros = new Array(numero);//Almacenaremos la serie de numero en este array con el tamaño de numero
 			var numeroActual = 1;
 			var numeroAnterior = 0;
@@ -178,7 +275,6 @@
 				resultFinal+=result;
 				numeros[i]=result;
 			}
-			
 			var serie="";//variable para contener la serie de numero en cadena
 			var numeroInt = 0;
 			for (var cont = 0; cont<numeros.length;cont++){
@@ -187,7 +283,6 @@
 			}
 			alert("La serie es: "+serie);
 			alert("La suma total de la serie es: "+resultFinal);
-			
 			continuarEjecucion("fibonaci();");
 		}
 
@@ -201,214 +296,45 @@
 			  return;
 		  	}
 		}
-		
-		
-		/*-----------------------------------------------------------*/
-		/*-----------------------APARTADO B--------------------------*/
-		/*-----------------------------------------------------------*/
-		/*Escribir el código de una función a la que se pasa como parámetro un número entero y devuelve
-		como resultado una cadena de texto que indica si el número es par o impar. Mostrar por pantalla el
-		resultado devuelto por la función.*/
-		function numeroParOImpar(numero){
-			if (numero%2 == 0){
-				alert("El numero introducido es par");
-			}
-			else{
-				alert("El numero introducido es impar");
-			}
-		}
-		
-		function obtenerNumero(){
-			var numero = prompt("Introduce un numero");
-			return numero;
-		}
-		
-		/*Calculo de la letra de DNI*/
-		function comprobacionLetraDni(){//TODO añadir roboustez
-			var letras = new Array('T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S',
-								   'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T');
-			var DniCompleto = prompt("Introduzca su DNI (letra incluida)");
-			var DniLetra = DniCompleto.substring(8);
-			var DniNumero = DniCompleto.substring(0,8);
-			DniNumero = parseInt(DniNumero,10);//Conversion de la variable a tipo int
-			alert(DniNumero);
-			if(DniNumero<0 || DniNumero>99999999){
-				alert("El numero de DNI introducido no es valido");
-				return;
-			}
-			var restoDivision = DniNumero%23;
-			
-			if (DniLetra!= letras[restoDivision]){
-				alert("La letra introducida no es correcta");
-				return;
-			}
-			else {
-				alert("El DNI introducido es correcto");
-			}
-		}
-		
-		/*Convertir en un Array los elementos del ejercicio 1 del apartado A y listar todos los elementos
-		 * mostrando el resultado mediante una tabla en Html
-		 */
-		function contruirTabla(){
-			var datos = new Array('true','false',5,2,"Hola","Adios");
-			
-			var tabla = document.createElement("table");
-			var fila = document.createElement("tr");
-			
-			//Cabeceras de la tabla
-			for(var i = 0;i<datos.length;i++){
-				
-				var columna = document.createElement("td");
-				var contenido = document.createTextNode("Columna "+i);
-				columna.appendChild(contenido);
-				fila.appendChild(columna);
-				tabla.appendChild(fila);
-				
-			}
-			
-			var fila2 = document.createElement("tr");//Creamos una nueva fila
-			//Datos de la tabla
-			for(var i = 0;i<datos.length;i++){
-				var columna = document.createElement("td");
-				var contenido = document.createTextNode(datos[i]);
-				columna.appendChild(contenido);
-				fila2.appendChild(columna);
-				tabla.appendChild(fila2);
-				
-			}
-			tabla.setAttribute("border","2");
-			
-			document.body.appendChild(tabla);
-			//alert("fin de funcion");
-		}
-		
-		function entradaDatos(){
-			var num1 = prompt("Introduce el 1º numero");
-			var num2 = prompt("Introduce el 2º numero");
-			var num3 = prompt("Introduce el 3º numero");
-			
-			maxMedyMin(num1,num2,num3);
-		}
-		
-		function maxMedyMin (num1,num2,num3){
-			var numero = new Array(3);
-			if (num1 > num2 && num1 > num3){
-				numero[0]="El mayor es: "+num1;
-				if (num2 > num3){
-					 	numero[1]="El mediano es: "+num2;
-					 	numero[2]="El menor es: "+num3;
-				}else{
-					numero[1]="El mediano es: "+num3;
-					numero[2]="El menor es: "+num2;
-				}
-			}
-			else if (num2 > num1 && num2 > num3){
-				numero[0]="El mayor es: "+num2;
-			
-				if (num1 > num3){
-				 	numero[1]="El mediano es: "+num1;
-				 	numero[2]="El menor es: "+num3;
-				}
-				else {
-					numero[1]="El mediano es: "+num3;
-				 	numero[2]="El menor es: "+num1;
-				}
-			}
-			else if (num3 > num2 && num3 > num1){
-				numero[0]="El mayor es: "+num3;
-				
-				if (num3 > num1){
-				 	numero[1]="El mediano es: "+num3;
-				 	numero[2]="El menor es: "+num1;
-				 }
-				 else{
-				 	numero[1]="El mediano es: "+num1;
-				 	numero[2]="El menor es: "+num3;
-				 }
-			}
-			
-			muestraOrdenValores(numero);
-		}
-		
-		function muestraOrdenValores(numero){
-			alert(numero[0]);
-			alert(numero[1]);
-			alert(numero[2]);
-			continuarEjecucion("enradaDatos();");//TODO cambiar funcion
-		}
-		
-		function repiteFinalizaProceso(funcion){
-			//Comprobacion si se desea continuar ejecutando
-			var r=confirm("Desea continuar s/n:");
-			if (r==true){
-			  eval(funcion);//de esta forma podemos volver a llamar a la funcion cuyo nombre a sido pasado como parametro
-			}
-			else{
-				alert("Ha decidido finalizar el proceso");
-			    return;
-		  	}
-		}
 		</script>
-    
     </head>
+    
     <body>
-        <h1>Practica 1</h1><hr />
+        <h1>Practica 1 - A</h1><hr />
         <fieldset>
         	<legend>ARARTADO A</legend>
-        	<table>
+        	
+        	<table border="0px">
         		<tr>
-        			<td width="550px">Cual de los elementos de texto es mayor: "hola","Adios"  </td>
+        			<td width="350px">Cual de los elementos de texto es mayor: "hola","Adios"  </td>
         			<td><input type="button" value="Ejecutar" onclick="mayorString()" /></td>
         		</tr>
         		<tr>
-        			<td width="550px">Determinar los operadores necesarios para obtener un resultado true y otro resultado false</td>
+        			<td width="350px">Determinar los operadores necesarios para obtener un resultado true y otro resultado false</td>
         			<td><input type="button" value="Ejecutar" onclick="booleanos()" /></td>
         		</tr>
-        		
         		<tr>
-        			<td width="550px">Introducir tres numero y ordenarlos ascendentemente: </td>
+        			<td width="350px">Resultado de las cinco operaciones matematicas </td>
+        			<td><input type="button" value="Ejecutar" onclick="controlDeOpMatematicas();" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Introducir tres numero y ordenarlos ascendentemente: </td>
         			<td><input type="button" value="Ejecutar" onclick="ordenarAscendente()" /></td>
         		</tr>
         		<tr>
-        			<td width="550px">Modificar los if para que se muestren los alert corrrectamente </td>
+        			<td width="350px">Modificar los if para que se muestren los alert corrrectamente </td>
         			<td><input type="button" value="Ejecutar" onclick="ejer3()" /></td>
         		</tr>
         		<tr>
-        			<td width="550px">Calcular el factorial de un numero </td>
+        			<td width="350px">Calcular el factorial de un numero </td>
         			<td><input type="button" value="Ejecutar" onclick="factorial()" /></td>
         		</tr>
         		<tr>
-        			<td width="550px">Serie fibonaci de un numero </td>
+        			<td width="300px">Serie fibonaci de un numero </td>
         			<td><input type="button" value="Ejecutar" onclick="fibonaci()" /></td>
         		</tr>
         	</table>
-        </fieldset>
-        
-        <fieldset>
-        	<legend>APARTADO B</legend>
-        	<table>
-        		<tr>
-        			<td width="550px">Numero par o impar</td>
-        			<td><input type="button" value="Ejecutar" onclick="numeroParOImpar(obtenerNumero())" /></td>
-        		</tr>
-        		<tr>
-        			<td width="550px">Comprobacion letra de DNI</td>
-        			<td><input type="button" value="Ejecutar" onclick="comprobacionLetraDni();" /></td>
-        		</tr>
-        		<tr>
-        			<td width="550px">Crear tabla dinamica</td>
-        			<td><input type="button" value="Ejecutar" onclick="contruirTabla()" /></td>
-        		</tr>
-        		<tr>
-        			<td width="550px">Ordenar 3 numeros version modificada</td>
-        			<td><input type="button" value="Ejecutar" onclick="entradaDatos()" /></td>
-        		</tr>
-        		<tr>
-        			<td width="550px">Ordenacion de un array de 15 alementos</td>
-        			<td><input type="button" value="Ejecutar" onclick="window.open('p1TablaBurbuja.html')" /></td>
-        		</tr>
-        	</table>
+        	</p>
         </fieldset>
     </body>
 </html>

@@ -1,0 +1,44 @@
+h1 {color: #DF0101}
+/*
+	Menu Horizontal
+*/
+div{
+	alignment-adjust: central;
+}
+
+#menuh {
+	font: 80% "Trebuchet MS", Arial, Helvetica, sans-serif;
+	margin-top: 0px;
+}
+
+#menuh ul, li {
+	list-style-type: none;
+}
+
+#menuh ul {
+	margin: 0;
+	padding: 0;
+}
+
+#menuh li {
+	float: left;
+}
+
+#menuh a {
+	text-decoration: none;
+	color: white;
+	background: #DF0101;
+	display: block;
+	padding: 3px 10px;
+	text-align: center;
+	border: 1px solid #ACCFE8;
+	border-width: 1px 1px 1px 0;
+}
+
+#menuh a#primero {
+	border-left: 1px solid #ACCFE8;
+}
+
+#menuh a:hover {
+	background: #8A0808;
+}

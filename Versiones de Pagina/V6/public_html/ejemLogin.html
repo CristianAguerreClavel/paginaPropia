@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Login</title>
+		<style type="text/css">
+			.oculto { display: none; }
+			.visible { display: inline; }
+		</style>
+		<script language="JavaScript">
+			function cambiarSeleccion(elemento){
+				if(elemento.value == 1){
+					/*------MOSTRAR------*/
+					var textoNom = document.getElementById("textoEmail");
+					var nomUsuario = document.getElementById("campoEmail");
+					var pass = document.getElementById("password");
+					var textoPass = document.getElementById("textoPassword");
+					
+					textoNom.className = "visible";
+					nomUsuario.className = "visible";
+					pass.className = "visible";
+					textoPass.className = "visible";
+					
+					/*-------OCULTAR------*/
+					var abueloTexto = document.getElementById("textoAbuelo");
+					var abueloNom = document.getElementById("campoAbuelo");
+					
+					abueloTexto.className = "oculto";
+					abueloNom.className = "oculto";
+					
+				}else{
+					/*------OCULTAR----*/
+					var textoNom = document.getElementById("textoEmail");
+					var nomUsuario = document.getElementById("campoEmail");
+					var pass = document.getElementById("password");
+					var textoPass = document.getElementById("textoPassword");
+					
+					textoNom.className = "oculto";
+					nomUsuario.className = "oculto";
+					pass.className = "oculto";
+					textoPass.className = "oculto";
+					
+					/*-------VISIBLE------*/
+					var abueloTexto = document.getElementById("textoAbuelo");
+					var abueloNom = document.getElementById("campoAbuelo");
+					
+					abueloTexto.className = "visible";
+					abueloNom.className = "visible";
+				}
+			}
+			
+			var arrayUsuario = new Array ("aguerre.clavel.cristian@gmail.com");
+			var arrayPassword = new Array ("cristian");
+			var arrayAbuelo = new Array ("vicente");
+			
+			//*----------------------------------------------------------------*/
+			/*-----------------VALIDACIONES CAMPO PASS/ABUELO------------------*/
+			/*-----------------------------------------------------------------*/
+			/*function comprobacionPassword(elemento){
+				if (campoVacio(elemento)){
+					alert("El campo no puede estar vacio");
+					return;
+				}
+				if(!campoComprobacion(elemento)){
+					alert("El valor introducido no existe");
+					return;
+				}
+			}*/
+			function comprobacionPassword(){
+				var correcto = true;
+				/*Comprobacion de campo activo*/
+				var radioPassword = document.getElementById("radioPassword");
+				var radioAbuelo = document.getElementById("radioAbuelo");
+				var campoPassword = document.getElementById("password");
+				if(radioPassword.checked){
+					if (campoVacio(campoPassword)){
+						correcto = false;
+					}
+					if (!campoComprobacion(campoPassword)){
+						correcto = false;
+					}
+				}
+				/*else{
+					campoVacio(radioAbuelo);
+					campoComprobacion(radioAbuelo);
+				}*/
+				return correcto;
+			}
+			function campoVacio(elemento){
+				var contenido = elemento.value;
+				if(contenido == ""){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			function campoComprobacion(elemento){
+				var correcto = false;
+				if(elemento.id == "password"){
+					for (i in arrayPassword){
+						if (elemento.value == arrayPassword[i]){
+							correcto = true;
+						}
+					}
+				}else{
+					for (i in arrayAbuelo){
+						if (elemento.value == arrayPassword[i]){
+							correcto = true;
+						}
+					}
+				}
+				return correcto;
+			}
+			
+			/*----------------------------------------------------------------*/
+			/*--------------------VALIDACIONES CAMPO E-MAIL-------------------*/
+			/*----------------------------------------------------------------*/
+			function comprobacionEmail(){
+				if(emailVacio()){
+					alert("El campo E-mail esta vacio");
+					return;
+				}
+				if(!emailEsquema()){
+					alert("E-mail incorrecto");
+					return;
+				}
+				if (!emailExiste()){
+					alert("El E-mail introducido no existe");
+					return;
+				}
+			}
+			function emailVacio(){
+				var email = document.getElementById("campoEmail");
+				
+				if(email.value == "" || email.value == null){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			function emailEsquema(){
+				var email = document.getElementById("campoEmail");
+				var contenido = email.value;
+				var re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
+				if(!re.exec(contenido)){
+					return false;
+			    }else{         
+			    	return true;     
+		    	} 
+			}
+			function emailExiste(){
+				var existe = false;
+				var email = document.getElementById("campoEmail");
+				var contenido = email.value;
+				for (i in arrayUsuario){
+					if(contenido == arrayUsuario[i]){
+						existe = true;
+					}
+				}
+				return existe;
+			}
+			
+			/*------------------------COMPROBACION NUEVOS PASS-----------------------*/
+			function coinciden(elemento1,elemento2){
+				var v1 = elemento1.value;
+				var v2 = elemento2.value;
+				if (v1 == v2){
+					return true;
+				}
+				else return false;
+			}
+			
+			function controlDeDatos(){
+				var p1 = document.getElementById("nuevoPassword");
+				var p2 = document.getElementById("RnuevoPassword");
+				var valor = p1.value;
+				var radioPassword = document.getElementById("radioPassword");
+				if(radioPassword.checked){
+					if(emailVacio()){
+						alert("El campo E-mail esta vacio");
+						return;
+					}
+					if(!emailEsquema()){
+						alert("E-mail incorrecto");
+						return;
+					}
+					if (!emailExiste()){
+						alert("El E-mail introducido no existe");
+						return;
+					}
+				}
+				if (!coinciden(p1,p2)){
+					alert("Las nuevas contraseñas no coinciden");
+					return;
+				}
+				if (!comprobacionPassword()){
+					alert("El campo password es incorrecto");
+					return;
+				}
+				crearVentana();
+				
+			}
+			
+			function crearVentana(){
+				//alert("dentro de crear ventana");
+				var email = document.getElementById("campoEmail");
+				var contenido = email.value;
+				var p1 = document.getElementById("nuevoPassword");
+				var p1Value = p1.value;
+				var nuevaVentana=open("","","");
+				nuevaVentana.focus();
+				nuevaVentana.document.write("<HTML><HEAD><TITLE>Nuevos datos</TITLE><link rel='stylesheet' type='text/css' href='EstiloP1.css'></HEAD>");
+			 	nuevaVentana.document.write("<BODY><h1>INFORMACION NUEVA</H1><hR /><table border='1'><tr><td>Usuario</td><td>"+contenido+"</td><tr><td>Nuevo pass</td><td>"+p1Value+"</td></tr></tr></table>");
+			 	//nuevaVentana.document.getElementById("p1").innerHTML=usuario;
+			 	nuevaVentana.document.close();
+			}
+		</script>
+		
+		
+	</head>
+	<body>
+		<table border="0px" height="100%" width="100%">
+			<tr height="20%">
+				<td id="cabecera" colspan="3">
+					<h1 align="center">CAMBIO DE CONTRASEÑA</h1><hr /><hr />
+				</td>
+			</tr>
+			
+			<tr height="60%">
+				<td id="login" align="right" colspan="2" width="50%">
+					<div align="center" style="background-color:#F5A9A9; border-radius: 6px; width: 40%;height: 30%";>
+						<fieldset style="border:1px solid red">
+							<legend align="center">Usuario</legend>
+							<table border="0px">
+								<tr>
+									<td>
+										<span id="textoEmail">E-mail</span>
+										<span id="textoAbuelo" class="oculto">Nombre del abuelo</span>
+									</td>
+									<td>
+										<input type="text" id="campoEmail" maxlength="50" onblur="comprobacionEmail()"/>
+										<input type="text" id="campoAbuelo" maxlength="50" class="oculto" onblur="comprobacionPassword()"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span id="textoPassword">Password</span>
+									</td>
+									<td>
+										<input type="password" id="password" maxlength="50" onblur="comprobacionPassword()"/>
+									</td>
+								</tr>
+								
+							</table>
+						</fieldset>
+					</div>
+				</td>
+				<td id="PassNuevo" align="left" colspan="2" width="50%">
+					<div align="center" style="background-color:#F5A9A9; border-radius: 6px; width: 38%;height: 43%";>
+						<fieldset style="border:1px solid red">
+							<legend align="center">Nuevo Password</legend>
+							<table>
+								<tr>
+									<td>
+										Nuevo password
+									</td>
+									<td>
+										<input id="nuevoPassword" type="text"  />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Repita el password
+									</td>
+									<td>
+										<input id="RnuevoPassword" type="text"  />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center">
+										<input type="button" value="Cambiar Password" style="width: 150px" onclick="controlDeDatos()" />
+									</td>
+								</tr>
+							</table>
+						</fieldset>
+					</div>
+				</td>
+			</tr>
+			<tr id="pie" height="20%">
+				<td align="bottom">
+					Password<input type="radio"  value="1" id="radioPassword" name="pass" onchange="cambiarSeleccion(this)" checked="checked" />
+					Nombre abuelo<input type="radio" value="2" id="radioAbuelo" name="pass" onchange="cambiarSeleccion(this)" /><br />
+					E-mail por defecto = aguerre.clavel.cristian@gmail.com<br /> 
+					Password por defecto = cristian, Abueno por defecto = vicente
+				</td>
+				<td align="right" colspan="2"><img src="Img/candado.jpg" /></td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -7,80 +7,117 @@
         <title>Cristian aguerre clavel</title>
     	<!-- Start css3menu.com HEAD section -->
 	    <link rel="stylesheet" href="index_files/css3menu0/style.css" type="text/css" /><style type="text/css">._css3m{display:none}</style>
-	<!-- End css3menu.com HEAD section -->
+		<!-- End css3menu.com HEAD section -->
 	
 		<!--ESTILO PARA EL RELOJ-->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     
-    <style type="text/css">
-        html {
-            font-family: 'Ubuntu', Arial, sans-serif;
-        }
-        
-        div.clock {
-            width: 100%;
-            text-align: center;
-        }
-
-            div.clock a {
-                color: #333;
-                font-size: 18px;
-                font-weight: bold;
-                text-decoration: none;
-            }
-
-                div.clock a:hover {
-                    text-decoration: underline;
-                }
-
-            div.clock div.date {
-                color: #DF0101;/*Color de la fecha superior*/
-                font-size: 1.5em;
-                margin: 8px 0;
-            }
-
-            div.clock div.time {
-                font-size: 3em;
-                font-weight: 200;
-            }
-
-                div.clock div.time span {
-                    border-radius: 5px;
-                    padding: 1px 4px 3px 4px;
-                    color: #fff;/*Color de los numeros del reloj
-
-					/*----------------------------------------------------------*/
-					/*---------------------COLOR DEL FONDO----------------------*/
-					/*----------------------------------------------------------*/
-                    /* fallback */
-                    background: #000;
-                    /* Safari 4-5, Chrome 1-9 */
-                    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DF0101), to(#DF0101));
-                    /* Safari 5.1, Chrome 10+ */
-                    background: -webkit-linear-gradient(top, red, red);
-                    /* Firefox 3.6+ */
-                    background: -moz-linear-gradient(top, #DF0101,#A40909);
-                    /* IE 10 */
-                    background: -ms-linear-gradient(top,#DF0101 black);
-                    /* Opera 11.10+ */
-                    background: -o-linear-gradient(top, red, red);
-                    /*----------------------------------------------------------*/
-					/*--------------------FIN COLOR DEL FONDO-------------------*/
-					/*----------------------------------------------------------*/
-                }
-
-                div.clock div.time strong {
-                    font-weight: 100;
-                    font-size: 1em;
-                    margin-left: 5px;
-                    color: #666;
-                }
-    </style>
+    	<style type="text/css">
+	        html {
+	            font-family: 'Ubuntu', Arial, sans-serif;
+	        }
+	        
+	        div.clock {
+	            width: 100%;
+	            text-align: center;
+	        }
+	
+	            div.clock a {
+	                color: #333;
+	                font-size: 18px;
+	                font-weight: bold;
+	                text-decoration: none;
+	            }
+	
+	                div.clock a:hover {
+	                    text-decoration: underline;
+	                }
+	
+	            div.clock div.date {
+	                color: #DF0101;/*Color de la fecha superior*/
+	                font-size: 1.5em;
+	                margin: 8px 0;
+	            }
+	
+	            div.clock div.time {
+	                font-size: 3em;
+	                font-weight: 200;
+	            }
+	
+	                div.clock div.time span {
+	                    border-radius: 5px;
+	                    padding: 1px 4px 3px 4px;
+	                    color: #fff;/*Color de los numeros del reloj
+	
+						/*----------------------------------------------------------*/
+						/*---------------------COLOR DEL FONDO----------------------*/
+						/*----------------------------------------------------------*/
+	                    /* fallback */
+	                    background: #000;
+	                    /* Safari 4-5, Chrome 1-9 */
+	                    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DF0101), to(#DF0101));
+	                    /* Safari 5.1, Chrome 10+ */
+	                    background: -webkit-linear-gradient(top,#DF0101, #A40909);
+	                    /* Firefox 3.6+ */
+	                    background: -moz-linear-gradient(top, #DF0101,#A40909);
+	                    /* IE 10 */
+	                    background: -ms-linear-gradient(top,#DF0101 #A40909);
+	                    /* Opera 11.10+ */
+	                    background: -o-linear-gradient(top, red, #A40909);
+	                    /*----------------------------------------------------------*/
+						/*--------------------FIN COLOR DEL FONDO-------------------*/
+						/*----------------------------------------------------------*/
+	                }
+	
+	                div.clock div.time strong {
+	                    font-weight: 100;
+	                    font-size: 1em;
+	                    margin-left: 5px;
+	                    color: #666;
+	                }
+   		 </style>
     
 </head>
     <body bgcolor="white">
 	 <script type="text/javascript">
-	
+			function miFecha(){
+
+				var cad="";
+				var date2=new Date();
+				var date=new Date();
+				
+				// 24*60*60*1000=86400000
+				date.setMonth(11);
+				date.setDate(31);
+				date.setHours(23, 59, 59);
+				date.setFullYear(2013);
+				
+				var fecha=new Date();
+				fecha=date.getTime()-date2.getTime();
+				var dias=fecha/86400000;
+				dias=Math.floor(dias);
+				var restodias=fecha%86400000;
+					
+				var msrestantesahoras=restodias/3600000;
+						  
+				var horas=Math.floor(msrestantesahoras);
+				var restohoras=restodias%3600000;
+						
+				var horasrestantesaminutos=restohoras/60000;
+				var min=Math.floor(horasrestantesaminutos);
+				var restominutos=restohoras%60000;
+						  
+				var minutosrestantesasegundos=restominutos/1000;
+				var seg=Math.floor(minutosrestantesasegundos);
+				var restosegundos=restominutos%1000;
+				var texto=document.getElementById("cuentaAtras");
+				cad="Faltan "+dias+" dias "+horas+" horas "+min+" minutos "+seg+" segundos para fin de ano";
+				texto.innerHTML=cad;
+				//alert(cad);
+				
+			}
+			setInterval(miFecha,-1000);
+			
 	        $(document).ready(function() {
 	            $("div#clock").simpleClock(1);
 	        });
@@ -180,7 +217,10 @@
 	
 	          };
 	        })(jQuery);
-	    //--></script>
+	        
+	       
+	</script>
+	    	    
 	<table border="0px" width="100%">
 		
 		<tr height="15%" width="100%">
@@ -193,6 +233,7 @@
 				<div class="clock" id="clock">
 			        <div class="date"></div>
 			        <div class="time"></div>
+			        <div id="cuentaAtras" style="font-size: 10px; color:  #DF0101"></div>
     			</div>
     		</td>
 		</tr>

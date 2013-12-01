@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="EstiloP1.css">
+		<title>Practica 1 - B</title>
+		
+		<script language="JavaScript">
+		//--------------------------------- FUNCIONES DE COMPROBACION DE DATOS
+	    	//Comprobaciones - Robustez
+	    	function esNumero(num){//funcion que si se le pasa un valor no numerico devuelve false
+	    		if (isNaN(num)){
+	    			return false;
+	    		}else{
+	    			return true;
+	    		}
+	    	}
+	    	
+	    	function esVacio(elemento){//Si esta vacio devuelve true
+	    		if(elemento == ""|| elemento== null){
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	function esNegativo(elemento){
+	    		if(elemento<0){
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}
+    	//-------------------------- FIN DE FUNCIONES DE COMPROBACION DE DATOS
+    	//--------------------------------------------------------------------
+    	//--------------------------------------------------------------------
+    	
+		/*-----------------------------------------------------------*/
+		/*-----------------------APARTADO B--------------------------*/
+		/*-----------------------------------------------------------*/
+			/*Escribir el código de una función a la que se pasa como parámetro un número entero y devuelve
+			como resultado una cadena de texto que indica si el número es par o impar. Mostrar por pantalla el
+			resultado devuelto por la función.*/
+			function numeroParOImpar(numero){
+				/*------------------------------------------------------------*/
+				/*----------------BLOQUE COMPROBACION DATOS-------------------*/
+				/*------------------------------------------------------------*/
+				//Comprobacion tipo de variables
+				if (!esNumero(numero)){
+					alert("El valor introducido no es un numero");
+					return;
+				}
+				//Comprobacion si esta vacio alguno de los numeros
+				if(esVacio(numero)){
+					alert("No ha introducido ningun valor");
+					return;
+				}
+				/*------------------------------------------------------------*/
+				/*----------------------FIN COMPROBACIONES--------------------*/
+				/*------------------------------------------------------------*/
+				if (numero%2 == 0){
+					alert("El numero introducido es par");
+				}
+				else{
+					alert("El numero introducido es impar");
+				}
+			}
+			
+			function obtenerNumero(){
+				var numero = prompt("Introduce un numero");
+				return numero;
+			}
+			
+			/*Calculo de la letra de DNI*/
+			function comprobacionLetraDni(){//TODO añadir roboustez
+				var letras = new Array('T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S',
+									   'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T');
+				var DniCompleto = prompt("Introduzca su DNI (letra incluida)");
+				var DniLetra = DniCompleto.substring(8);
+				DniLetra = DniLetra.toUpperCase();
+				var DniNumero = DniCompleto.substring(0,8);
+				/*------------------------------------------------------------*/
+				/*----------------BLOQUE COMPROBACION DATOS-------------------*/
+				/*------------------------------------------------------------*/
+				//Comprobacion si esta vacio alguno de los numeros
+				if(esVacio(DniCompleto)){
+					alert("No ha introducido ningun valor");
+					return;
+				}
+				
+				/*------------------------------------------------------------*/
+				/*----------------------FIN COMPROBACIONES--------------------*/
+				/*------------------------------------------------------------*/
+				DniNumero = parseInt(DniNumero,10);//Conversion de la variable a tipo int
+				//alert(DniNumero);
+				if(DniNumero<0 || DniNumero>99999999){
+					alert("El numero de DNI introducido no es valido");
+					return;
+				}
+				var restoDivision = DniNumero%23;
+				
+				if (DniLetra!= letras[restoDivision]){
+					alert("La letra introducida no es correcta");
+					return;
+				}
+				else {
+					alert("El DNI introducido es correcto");
+				}
+			}
+			
+			/*Convertir en un Array los elementos del ejercicio 1 del apartado A y listar todos los elementos
+			 * mostrando el resultado mediante una tabla en Html
+			 */
+			function entradaDatos(){
+				var num1 = prompt("Introduce el 1º numero");
+				var num2 = prompt("Introduce el 2º numero");
+				var num3 = prompt("Introduce el 3º numero");
+				
+				maxMedyMin(num1,num2,num3);
+			}
+			
+			function maxMedyMin (num1,num2,num3){
+				var numero = new Array(3);
+				if (num1 > num2 && num1 > num3){
+					numero[0]="El mayor es: "+num1;
+					if (num2 > num3){
+						 	numero[1]="El mediano es: "+num2;
+						 	numero[2]="El menor es: "+num3;
+					}else{
+						numero[1]="El mediano es: "+num3;
+						numero[2]="El menor es: "+num2;
+					}
+				}
+				else if (num2 > num1 && num2 > num3){
+					numero[0]="El mayor es: "+num2;
+				
+					if (num1 > num3){
+					 	numero[1]="El mediano es: "+num1;
+					 	numero[2]="El menor es: "+num3;
+					}
+					else {
+						numero[1]="El mediano es: "+num3;
+					 	numero[2]="El menor es: "+num1;
+					}
+				}
+				else if (num3 > num2 && num3 > num1){
+					numero[0]="El mayor es: "+num3;
+					
+					if (num2 > num1){
+					 	numero[1]="El mediano es: "+num2;
+					 	numero[2]="El menor es: "+num1;
+					 }
+					 else{
+					 	numero[1]="El mediano es: "+num1;
+					 	numero[2]="El menor es: "+num2;
+					 }
+				}
+				muestraOrdenValores(numero);
+			}
+			
+			function muestraOrdenValores(numero){
+				alert(numero[0]);
+				alert(numero[1]);
+				alert(numero[2]);
+				continuarEjecucion("enradaDatos();");//TODO cambiar funcion
+			}
+			
+			function repiteFinalizaProceso(funcion){
+				//Comprobacion si se desea continuar ejecutando
+				var r=confirm("Desea continuar s/n:");
+				if (r==true){
+				  eval(funcion);//de esta forma podemos volver a llamar a la funcion cuyo nombre a sido pasado como parametro
+				}
+				else{
+					alert("Ha decidido finalizar el proceso");
+				    return;
+			  	}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<h1>Practica 1 - B</h1><hr />
+		<fieldset>
+        	<legend>APARTADO B</legend>
+        	<table>
+        		<tr>
+        			<td width="350px">Numero par o impar</td>
+        			<td><input type="button" value="Ejecutar" onclick="numeroParOImpar(obtenerNumero())" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Comprobacion letra de DNI</td>
+        			<td><input type="button" value="Ejecutar" onclick="comprobacionLetraDni();" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Crear tabla dinamica</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('tabla1.html')" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Ordenar 3 numeros version modificada</td>
+        			<td><input type="button" value="Ejecutar" onclick="entradaDatos()" /></td>
+        		</tr>
+        		<tr>
+        			<td width="350px">Ordenacion de un array de 15 alementos</td>
+        			<td><input type="button" value="Ejecutar" onclick="window.open('p1TablaBurbuja.html')" /></td>
+        		</tr>
+        	</table>
+        </fieldset>
+		</body>
+</html>
+
